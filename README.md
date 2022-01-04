@@ -1,3 +1,3 @@
 # IMGEProjekt
 
-Test
+This is the README of the project.
