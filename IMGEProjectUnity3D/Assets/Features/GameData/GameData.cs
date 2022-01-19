@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class GameData : SingletonMonoBehaviour<GameData>
 {
-    private ReactiveProperty<int> score = new ReactiveProperty<int>(0);
+    public ReactiveProperty<int> score = new ReactiveProperty<int>(0);
 
     public event EventHandler<int> scoreUpdated;
     
