@@ -15,15 +15,15 @@ public class Coin : MonoBehaviour
         sensor.SensorTriggered.Subscribe(CollectSignalDetected).AddTo(this);
     }
 
-    public void Collect()
+    private void Collect()
     {
         GameData.Instance.IncreaseScore(value);
     }
     
-    void CollectSignalDetected(EventArgs args) {
-        Debug.Log("CollectSignalDetected!");
+    private void CollectSignalDetected(EventArgs args) {
         Collect();
         gameObject.SetActive(false);
+        // why dont we delete it here?
     }
 
 }

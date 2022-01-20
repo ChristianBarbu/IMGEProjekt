@@ -19,12 +19,6 @@ public class ScoreLabel : MonoBehaviour
         scoreText = gameObject.GetComponent<TextMeshProUGUI>();
     }
 
-    private void Update()
-    {
-        if(scoreText == null) 
-            Debug.Log("scoreText is null!");
-    }
-
     void SetScoreText(object sender, int scoreValue)
     {
         scoreText.text = scoreValue.ToString();

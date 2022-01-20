@@ -7,17 +7,20 @@ using UnityEngine;
 public class GameData : SingletonMonoBehaviour<GameData>
 {
     public ReactiveProperty<int> score = new ReactiveProperty<int>(0);
+    
+    public ReactiveProperty<float> health = new ReactiveProperty<float>(5);
+
+    public ReactiveProperty<float> shield = new ReactiveProperty<float>(0);
 
     public event EventHandler<int> scoreUpdated;
-    
-    protected virtual void OnGameDataUpdate(int score)
+    public event EventHandler<float> healthUpdated;
+    public event EventHandler<float> shieldUpdated;
+
+    protected virtual void OnGameDataUpdate(int score, float health, float shield)
     {
         scoreUpdated?.Invoke(this, score);
-    }
-
-    private void Update()
-    {
-        Debug.Log("score = " + score);
+        healthUpdated?.Invoke(this, health);
+        shieldUpdated?.Invoke(this, shield);
     }
 
     public int Score
@@ -26,7 +29,27 @@ public class GameData : SingletonMonoBehaviour<GameData>
         set
         {
             score.Value = value;
-            OnGameDataUpdate(score.Value);
+            OnGameDataUpdate(score.Value, health.Value, shield.Value);
+        }
+    }
+
+    public float Health
+    {
+        get => health.Value;
+        set
+        {
+            health.Value = value;
+            OnGameDataUpdate(score.Value, health.Value, shield.Value);
+        }
+    }
+
+    public float Shield
+    {
+        get => shield.Value;
+        set
+        {
+            shield.Value = value;
+            OnGameDataUpdate(score.Value, health.Value, shield.Value);
         }
     }
 
@@ -35,11 +58,41 @@ public class GameData : SingletonMonoBehaviour<GameData>
         Score += value;
     }
 
+    public void IncreaseHealth(float value)
+    {
+        if (Health < 1)
+            Health = Mathf.Clamp(Health + value, 0, 1);
+    }
+
+    public void DecreaseHealth(float value)
+    {
+        if (Health > 0)
+            Health = Mathf.Clamp(Health - value, 0, 1);
+    }
+
+    public void DecreaseShield(float value)
+    {
+        if (Shield >= 0)
+            Shield = Mathf.Clamp(Shield - value, 0, 1);
+    }
+    
+    public void IncreaseShield(float value)
+    {
+        Shield = Mathf.Clamp(Shield + value, 0, 1);
+    }
+
     public void ResetScore()
     {
         Score = 0;
     }
-    
-    
-    
+
+    public void ResetHealth()
+    {
+        Health = 1;
+    }
+
+    public void ResetShield()
+    {
+        Shield = 1;
+    }
 }
