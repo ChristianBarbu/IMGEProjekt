@@ -32,4 +32,9 @@ public class NavMeshAgentEnemy : Enemy
                 agent.SetDestination(navMeshHit.position);
         }
     }
+
+    public override void SetActive(bool b)
+    {
+        agent.enabled = true;
+    }
 }

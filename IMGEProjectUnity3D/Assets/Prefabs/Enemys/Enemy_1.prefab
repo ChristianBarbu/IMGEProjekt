@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6680254853141290419}
   - component: {fileID: 4868943905540340481}
   - component: {fileID: 3829510512686954503}
-  - component: {fileID: 3409921608678445781}
+  - component: {fileID: 8984715938533865108}
   m_Layer: 0
   m_Name: Enemy_1
   m_TagString: Untagged
@@ -135,7 +135,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distanceToPlayer: 0
---- !u!114 &3409921608678445781
+--- !u!114 &8984715938533865108
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -144,12 +144,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 4378162937005788218}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1fcacf29e5c50ec48991a5998628c2a4, type: 3}
+  m_Script: {fileID: 11500000, guid: b265a6d6024a72643b4c55b4b2ece2cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cost: 10
   weight: 10
-  minSpawnDistance: 20
-  maxSpawnDistance: 100
+  minSpawnDistance: 50
+  maxSpawnDistance: 200
   canSpawnInAir: 0
   conditions: []

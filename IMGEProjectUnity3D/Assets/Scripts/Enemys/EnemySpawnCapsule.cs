@@ -57,8 +57,8 @@ public class EnemySpawnCapsule : MonoBehaviour
     }
     public void Dissolve()
     {
-        var ai = enemy.GetComponent<NavMeshAgent>();
-        ai.enabled = true;
+        var ai = enemy.GetComponent<Enemy>();
+        ai.SetActive(true);
         Destroy(gameObject);
     }
 

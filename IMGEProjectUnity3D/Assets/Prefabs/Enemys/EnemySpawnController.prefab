@@ -86,8 +86,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7984301691748037120}
-  - component: {fileID: 7984301691748037121}
   - component: {fileID: 3308323119908199324}
+  - component: {fileID: 1448548711621154765}
   m_Layer: 10
   m_Name: EnemySpawnController
   m_TagString: GameController
@@ -111,30 +111,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7984301691748037121
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7984301691748037122}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61029fdf32d64db408cc4ac0e32ebd63, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  difficultyScaling: 1
-  startCredits: 100
-  ToCheapMultiplier: 6
-  MaxEnemysPerWave: 5
-  MaxEnemyCount: 40
-  minTimeBetweenWaves: 4
-  maxTimeBetweenWaves: 15
-  minTimeBetweenSpawns: 0.5
-  maxTimeBetweenSpawns: 5
-  player: {fileID: 0}
-  creditGenerator: {fileID: 3308323119908199324}
-  enemys: []
 --- !u!114 &3308323119908199324
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,3 +124,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   creditMultiplier: 1
+--- !u!114 &1448548711621154765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7984301691748037122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58a320350a948d247affab3b9c1a37f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  difficultyScaling: 1
+  startCredits: 100
+  ToCheapMultiplier: 6
+  MaxObjectsPerWave: 5
+  MaxObjectsCount: 40
+  minTimeBetweenWaves: 4
+  maxTimeBetweenWaves: 15
+  minTimeBetweenSpawns: 0.5
+  maxTimeBetweenSpawns: 5
+  player: {fileID: 0}
+  creditGenerator: {fileID: 3308323119908199324}
+  objects: []

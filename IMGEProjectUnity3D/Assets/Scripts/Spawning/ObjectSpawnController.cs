@@ -6,25 +6,25 @@ using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
 
-public class EnemySpawnController : MonoBehaviour
+public class ObjectSpawnController : MonoBehaviour
 {
     public float difficultyScaling = 1;
     public float startCredits = 100;
-    [Tooltip("Enemy is declared to cheap to spawn if credits >= cost * ToCheapMultiplier")]
+    [Tooltip("Object is declared to cheap to spawn if credits >= cost * ToCheapMultiplier")]
     public float ToCheapMultiplier = 6;
-    [Tooltip("Max enemies spawned in a short time frame")]
-    public float MaxEnemysPerWave = 5;
-    [Tooltip("Will not spawn if there are more enemys")]
-    public int MaxEnemyCount = 40;
+    [Tooltip("Max objects spawned in a short time frame")]
+    public float MaxObjectsPerWave = 5;
+    [Tooltip("Will not spawn if there are more objects")]
+    public int MaxObjectsCount = 40;
 
     [Tooltip("Inactive time after wave was spawned is determined by a random time bewteen minTimeBetweenWaves and maxTimeBetweenWaves")]
     public float minTimeBetweenWaves = 4;
     [Tooltip("Inactive time after wave was spawned is determined by a random time bewteen minTimeBetweenWaves and maxTimeBetweenWaves")]
     public float maxTimeBetweenWaves = 15;
 
-    [Tooltip("Inactive time after a monster was spawned is determined by a random time bewteen minTimeBetweenSpawns and maxTimeBetweenWaves")]
+    [Tooltip("Inactive time after an object was spawned is determined by a random time bewteen minTimeBetweenSpawns and maxTimeBetweenWaves")]
     public float minTimeBetweenSpawns = 0.5f;
-    [Tooltip("Inactive time after a monster was spawned is determined by a random time bewteen minTimeBetweenSpawns and maxTimeBetweenWaves")]
+    [Tooltip("Inactive time after a object was spawned is determined by a random time bewteen minTimeBetweenSpawns and maxTimeBetweenWaves")]
     public float maxTimeBetweenSpawns = 5;
 
 
@@ -34,34 +34,30 @@ public class EnemySpawnController : MonoBehaviour
 
 
 
-    public List<GameObject> enemys;
+    public List<GameObject> objects;
     //public List<GameObject> bosses;
 
-    private Dictionary<GameObject, EnemySpawnInfo> enemyData;
+    private Dictionary<GameObject, ObjectSpawnInfo> objectData;
 
-    private List<Collider> SpawnAreas;
+    private List<Collider> spawnAreas;
 
     private double credits;
-    private double combinedEnemyWeight;
+    private double combinedObjectWeight;
     private double mostExpensiveCosts;
-
-
-    private ReactiveProperty<double> waveTimerInterval = new ReactiveProperty<double>();
-    private ReactiveProperty<double> spawnTimerInterval = new ReactiveProperty<double>();
 
 
     private void Awake()
     {
-        enemyData=new Dictionary<GameObject, EnemySpawnInfo>(enemys.Select(e=> 
+        objectData=new Dictionary<GameObject, ObjectSpawnInfo>(objects.Select(e=> 
         {
-            EnemySpawnInfo data = e.GetComponentInChildren<EnemySpawnInfo>();
+            ObjectSpawnInfo data = e.GetComponentInChildren<ObjectSpawnInfo>();
             if (data == null)
-                data = e.GetComponent<EnemySpawnCapsule>()?.enemy?.GetComponent<EnemySpawnInfo>();
+                data = e.GetComponent<EnemySpawnCapsule>()?.enemy?.GetComponent<ObjectSpawnInfo>();
             if(data.cost > mostExpensiveCosts)
                 mostExpensiveCosts = data.cost;
-            return new KeyValuePair<GameObject, EnemySpawnInfo>(e, data);
+            return new KeyValuePair<GameObject, ObjectSpawnInfo>(e, data);
             }));
-        combinedEnemyWeight = enemyData.Values.Sum(i => i.weight);
+        combinedObjectWeight = objectData.Values.Sum(i => i.weight);
     }
 
     void Start()
@@ -70,7 +66,7 @@ public class EnemySpawnController : MonoBehaviour
         creditGenerator.Credits
             .Subscribe(c => credits += c)
             .AddTo(this);
-        SpawnAreas = new List<Collider>(GetComponentsInChildren<Collider>());
+        spawnAreas = new List<Collider>(GetComponentsInChildren<Collider>());
 
         // start loop
         StartCoroutine(SpawnLoop());
@@ -85,15 +81,15 @@ public class EnemySpawnController : MonoBehaviour
     ///             skip
     ///         if previous spawn success:
     ///             increase spawn timer by spawn interval (during wave)
-    ///             keep selected enemy
+    ///             keep selected  obj
     ///         else
     ///             if preselected:
     ///                 prepare wave with preselected
     ///             else
-    ///                 select random enemy
+    ///                 select random  obj
     ///             spawn counter = 0
     ///         check selected with:
-    ///             - current wave <= 5 enemys
+    ///             - current wave <= 5  objs
     ///             - spawn conditions
     ///             - affordable cost
     ///             - not too cheap:
@@ -103,7 +99,7 @@ public class EnemySpawnController : MonoBehaviour
     ///                 ;
     ///             else:
     ///                 spawn timer increas (between waves)
-    ///                 current enemy deselected
+    ///                 current  obj deselected
     ///         prepare spawn
     ///         pay
     ///         spawncounter++
@@ -116,7 +112,7 @@ public class EnemySpawnController : MonoBehaviour
     }
 
     private bool lastSpawnFailed = true;
-    private GameObject selectedEnemy;
+    private GameObject selectedObject;
     private int spawnCounter = 0;
 
     IEnumerator SpawnLoop()
@@ -129,26 +125,26 @@ public class EnemySpawnController : MonoBehaviour
             }
             if (lastSpawnFailed)
             {
-                if(selectedEnemy == null)
+                if(selectedObject == null)
                 {
-                    SelectRandomEnemyByWeight();
+                    SelectRandomObjectByWeight();
                 }
                 spawnCounter = 0;
             }
-            if (spawnCounter < MaxEnemysPerWave &&
-                ConfirmSpawnConditions(selectedEnemy) &&
-                IsAffordable(selectedEnemy) &&
-                !IsToCheap(selectedEnemy))
+            if (spawnCounter < MaxObjectsPerWave &&
+                ConfirmSpawnConditions(selectedObject) &&
+                IsAffordable(selectedObject) &&
+                !IsToCheap(selectedObject))
             {
                 //Spawn
-                SpendCredits(selectedEnemy);
+                SpendCredits(selectedObject);
                 spawnCounter++;
                 // calculate hp/dmg
                 // set reward
-                var pos = CalculateSpawnPosition(selectedEnemy);
+                var pos = CalculateSpawnPosition(selectedObject);
                 if (pos.x == float.NegativeInfinity)
                     yield return FailSpawn();
-                SpawnEnemy(selectedEnemy, pos);
+                SpawnObject(selectedObject, pos);
                 yield return SuccessSpawn();
             }
             else
@@ -162,7 +158,7 @@ public class EnemySpawnController : MonoBehaviour
     WaitForSeconds FailSpawn()
     {
         lastSpawnFailed = true;
-        selectedEnemy = null;
+        selectedObject = null;
         var t = GetWaveInactiveTime();
         Debug.Log("FAIL Spawn - WaitFor: " + t);
         return new WaitForSeconds(t);
@@ -175,17 +171,17 @@ public class EnemySpawnController : MonoBehaviour
         return new WaitForSeconds(t);
     }
 
-    void SpawnEnemy(GameObject enemy, Vector3 position)
+    void SpawnObject(GameObject  obj, Vector3 position)
     {
-        Instantiate(enemy, position, new Quaternion());
+        Instantiate(obj, position, new Quaternion());
     }
 
-    Vector3 CalculateSpawnPosition(GameObject enemy)
+    protected virtual Vector3 CalculateSpawnPosition(GameObject obj)
     {
-        var data = enemyData[enemy];
+        var data = objectData[obj];
         UnityEngine.Random.Range(data.minSpawnDistance, data.maxSpawnDistance);
-        var max = Physics.OverlapSphere(player.transform.position, data.maxSpawnDistance, (1 << gameObject.layer));
-        var min = Physics.OverlapSphere(player.transform.position, data.minSpawnDistance, (1 << gameObject.layer));
+        var max = Physics.OverlapSphere(player.transform.position, data.maxSpawnDistance, (1 << gameObject.layer)).Intersect(spawnAreas);
+        var min = Physics.OverlapSphere(player.transform.position, data.minSpawnDistance, (1 << gameObject.layer)).Intersect(spawnAreas);
         var selection = new List<Collider>(max.Except(min.Except(min.Intersect(max))));
         if (selection.Count == 0)
         {
@@ -235,47 +231,44 @@ public class EnemySpawnController : MonoBehaviour
 
     
 
-    void SelectRandomEnemyByWeight()
+    void SelectRandomObjectByWeight()
     {
-        var v = UnityEngine.Random.value * combinedEnemyWeight;
-        selectedEnemy = enemyData.FirstOrDefault(e => v >= (combinedEnemyWeight -= e.Value.weight)).Key;
+        var v = UnityEngine.Random.value * combinedObjectWeight;
+        selectedObject = objectData.FirstOrDefault(e => v >= (combinedObjectWeight -= e.Value.weight)).Key;
     }
 
-    bool IsToCheap(GameObject enemy)
+    bool IsToCheap(GameObject  obj)
     {
-        var c = (float)enemyData[enemy].cost * ToCheapMultiplier <= credits && enemyData[enemy].cost != mostExpensiveCosts;
+        var c = (float)objectData[obj].cost * ToCheapMultiplier <= credits && objectData[obj].cost != mostExpensiveCosts;
         if (c)
             Debug.Log("FAIL - To Cheap");
         return c;
     }
 
-    bool IsAffordable(GameObject enemy)
+    bool IsAffordable(GameObject  obj)
     {
-        var c = enemyData[enemy].cost <= credits;
+        var c = objectData[obj].cost <= credits;
         if (!c)
             Debug.Log("FAIL - Not Affordable");
         return c;
     }
 
-    bool ConfirmSpawnConditions(GameObject enemy)
+    bool ConfirmSpawnConditions(GameObject  obj)
     {
-        var c = !enemyData[enemy].conditions.Any(c => !c.CanSpawn());
+        var c = !objectData[obj].conditions.Any(c => !c.CanSpawn());
         if(!c)
             Debug.Log("FAIL - Condition");
         return c;
     }
 
-    void SpendCredits(GameObject enemy) 
+    void SpendCredits(GameObject  obj) 
     {
-        credits -= enemyData[enemy].cost;
+        credits -= objectData[obj].cost;
     }
 
-    bool IsOvercrowding()
+    protected virtual bool IsOvercrowding()
     {
-        var c = GameData.Instance.EnemyCount >= MaxEnemyCount;
-        if (c)
-            Debug.Log("FAIL - Overcrowding");
-        return c;
+        return false;
     }
 
     float GetWaveInactiveTime()

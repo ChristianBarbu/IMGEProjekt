@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySpawnInfo : MonoBehaviour
+public class ObjectSpawnInfo : MonoBehaviour
 {
     [Tooltip("spawn cost")]
     public int cost;
@@ -18,5 +18,5 @@ public class EnemySpawnInfo : MonoBehaviour
 
     public bool canSpawnInAir;
 
-    public List<EnemySpawnCondition> conditions = new List<EnemySpawnCondition>();
+    public List<ObjectSpawnCondition> conditions = new List<ObjectSpawnCondition>();
 }

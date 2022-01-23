@@ -9,6 +9,7 @@ public class GameData
     private GameData()
     {
         EnemyCount = 0;
+        CollectableCunt = 0;
         _difficultyScaling.Value = 1;
     }
 
@@ -29,6 +30,11 @@ public class GameData
     }
 
     public int EnemyCount
+    {
+        get;set;
+    }
+
+    public int CollectableCunt
     {
         get;set;
     }

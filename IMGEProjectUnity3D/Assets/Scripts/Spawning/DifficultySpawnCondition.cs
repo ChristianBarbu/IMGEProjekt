@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DifficultySpawnCondition : EnemySpawnCondition
+public class DifficultySpawnCondition : ObjectSpawnCondition
 {
     public double upperDifficultyScalingThreshold;
     public double lowerDifficultyScalingThreshold;
