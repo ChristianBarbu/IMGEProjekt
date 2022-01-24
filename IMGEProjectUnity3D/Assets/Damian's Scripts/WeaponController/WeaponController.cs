@@ -5,6 +5,11 @@ using UnityEngine;
 public abstract class WeaponController : MonoBehaviour
 {
     public GameObject bullet;
+    public GameObject bulletSpawn;
+
+    public float fireRate;
+
+    private float timeBetweenShots = 0;
 
     private bool shouldShoot = false;
 
@@ -19,15 +24,17 @@ public abstract class WeaponController : MonoBehaviour
 
     public abstract void fireShots();
 
-    private void Update()
+    private void FixedUpdate()
     {
-        if(this.shouldShoot)
+        if(this.shouldShoot && Time.time > timeBetweenShots)
         {
-            fireShots();
+            timeBetweenShots = Time.time + (1/fireRate);
+            fireShots();     
         }
     }
 
 }
+
 
 /* Shootinputstream wird geraised ruft shoot methode auf welche dann
 
