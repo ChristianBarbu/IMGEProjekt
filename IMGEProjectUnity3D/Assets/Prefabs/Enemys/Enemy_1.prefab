@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 8050084849774986466}
   - component: {fileID: 6680254853141290419}
   - component: {fileID: 4868943905540340481}
-  - component: {fileID: 3829510512686954503}
   - component: {fileID: 8984715938533865108}
+  - component: {fileID: 3420466610782106211}
   m_Layer: 0
   m_Name: Enemy_1
   m_TagString: Untagged
@@ -107,7 +107,7 @@ NavMeshAgent:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4378162937005788218}
-  m_Enabled: 0
+  m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 10
@@ -122,19 +122,6 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &3829510512686954503
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4378162937005788218}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d77bede6611f59445b62a4029b57322b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  distanceToPlayer: 0
 --- !u!114 &8984715938533865108
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,3 +140,18 @@ MonoBehaviour:
   maxSpawnDistance: 200
   canSpawnInAir: 0
   conditions: []
+--- !u!114 &3420466610782106211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4378162937005788218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d77bede6611f59445b62a4029b57322b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetDistanceToPlayer: 1
+  attackRange: 1
+  attackCoolDown: 4

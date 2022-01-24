@@ -21,6 +21,8 @@ public class EnemySpawnCapsule : MonoBehaviour
     void Start()
     {
         enemy = Object.Instantiate(enemy, enemyContainer.transform);
+        var ai = enemy.GetComponent<Enemy>();
+        ai.SetActive(false);
         ScaleCapsuleToEnemy();
     }
 

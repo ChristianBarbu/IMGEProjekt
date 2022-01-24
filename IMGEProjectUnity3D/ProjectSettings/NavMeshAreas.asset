@@ -91,10 +91,10 @@ NavMeshProjectSettings:
       m_Flags: 0
   - serializedVersion: 2
     agentTypeID: -1372625422
-    agentRadius: 0.5
-    agentHeight: 2.25
+    agentRadius: 1
+    agentHeight: 1
     agentSlope: 60
-    agentClimb: 0.4
+    agentClimb: 10
     ledgeDropHeight: 0
     maxJumpAcrossDistance: 0
     minRegionArea: 2
@@ -109,4 +109,4 @@ NavMeshProjectSettings:
       m_Flags: 0
   m_SettingNames:
   - Humanoid
-  - New Agent
+  - Drone

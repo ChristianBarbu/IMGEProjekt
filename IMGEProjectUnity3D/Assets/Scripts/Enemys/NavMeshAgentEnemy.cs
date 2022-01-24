@@ -6,22 +6,27 @@ using UnityEngine.AI;
 public class NavMeshAgentEnemy : Enemy
 {
     NavMeshAgent agent;
-    protected GameObject player;
 
-    void Start()
-    {   
-        player = GameObject.FindGameObjectWithTag("Player");
+
+    public override void Start()
+    {
+        base.Start();
         agent = GetComponent<NavMeshAgent>();
     }
+
 
     private void Update()
     {
         if (!agent.isOnNavMesh)
             return;
-        if ((transform.position - player.transform.position).magnitude <= distanceToPlayer)
+        if (distanceToPlayer <= targetDistanceToPlayer)
         {
             agent.isStopped = true;
             return;
+        }
+        else
+        {
+            agent.isStopped = false;
         }
         RaycastHit hit;
         if(Physics.Raycast(player.transform.position,Vector3.down,out hit))
@@ -29,12 +34,30 @@ public class NavMeshAgentEnemy : Enemy
             NavMeshHit navMeshHit;
             NavMesh.SamplePosition(hit.point, out navMeshHit, Mathf.Max(100,this.distanceToPlayer), 1);
             if (navMeshHit.hit)
-                agent.SetDestination(navMeshHit.position);
+            {
+                var preDest = agent.destination;
+                //agent.SetDestination(navMeshHit.position);
+                agent.CalculatePath(navMeshHit.position, agent.path);
+                if (agent.pathStatus != NavMeshPathStatus.PathComplete)
+                {
+                    agent.SetDestination(preDest);  
+                }
+                else
+                {
+                    agent.destination = navMeshHit.position;
+                }
+
+            }
         }
     }
 
     public override void SetActive(bool b)
     {
         agent.enabled = true;
+    }
+
+    public override void Attack()
+     {
+       // throw new System.NotImplementedException();
     }
 }
