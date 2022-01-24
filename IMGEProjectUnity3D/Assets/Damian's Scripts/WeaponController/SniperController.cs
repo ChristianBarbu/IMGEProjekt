@@ -7,6 +7,6 @@ public class SniperController : WeaponController
     public override void fireShots()
     {
         Instantiate(this.bullet, bulletSpawn.transform.position, bulletSpawn.transform.rotation);
-        this.stopShooting();
+        //this.stopShooting();
     }
 }
