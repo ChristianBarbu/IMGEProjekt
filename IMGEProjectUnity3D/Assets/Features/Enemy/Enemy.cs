@@ -10,11 +10,32 @@ public class Enemy : MonoBehaviour
     public float playerHealthDecrease;
     public float playerShieldDecrese;
 
+    #region degbug freeze
+    public float speed;
+    public float width;
+    public float zwidth;
+
+    private Vector3 curPos;
+    
+    private float timeCounter = 0;
+    
+    private void Update()
+    {
+        timeCounter += Time.deltaTime*speed;
+
+        float x = Mathf.Cos(timeCounter)*width + curPos.x;
+        float y = curPos.y;
+        float z = Mathf.Sin(timeCounter)*zwidth + curPos.z;
+
+        transform.position = new Vector3(x, y, z);
+    }
+    #endregion
     private void Start()
     {
+        curPos = transform.position;
         sensor.SensorTriggered.Subscribe(HitSignalDetected).AddTo(this);
     }
-    
+
     public void Hit()
     {
         var currentHealth = Mathf.Clamp(GameData.Instance.Health, 0, 1);
