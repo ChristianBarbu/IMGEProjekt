@@ -32,6 +32,8 @@ public class ObjectSpawnController : MonoBehaviour
     public CreditGenerator creditGenerator;
 
 
+    protected GameObject spawnedObject = null;
+
 
 
     public List<GameObject> objects;
@@ -67,6 +69,8 @@ public class ObjectSpawnController : MonoBehaviour
             .Subscribe(c => credits += c)
             .AddTo(this);
         spawnAreas = new List<Collider>(GetComponentsInChildren<Collider>());
+        // In case you forget
+        spawnAreas.ForEach(s => s.isTrigger = true);
 
         // start loop
         StartCoroutine(SpawnLoop());
@@ -121,7 +125,8 @@ public class ObjectSpawnController : MonoBehaviour
         {
             if(IsOvercrowding())
             {
-               yield return FailSpawn();
+                yield return FailSpawn();
+                continue;
             }
             if (lastSpawnFailed)
             {
@@ -131,7 +136,8 @@ public class ObjectSpawnController : MonoBehaviour
                 }
                 spawnCounter = 0;
             }
-            if (spawnCounter < MaxObjectsPerWave &&
+            if (selectedObject != null &&
+                spawnCounter < MaxObjectsPerWave &&
                 ConfirmSpawnConditions(selectedObject) &&
                 IsAffordable(selectedObject) &&
                 !IsToCheap(selectedObject))
@@ -143,13 +149,18 @@ public class ObjectSpawnController : MonoBehaviour
                 // set reward
                 var pos = CalculateSpawnPosition(selectedObject);
                 if (pos.x == float.NegativeInfinity)
+                {
                     yield return FailSpawn();
+                    continue;
+                }
                 SpawnObject(selectedObject, pos);
                 yield return SuccessSpawn();
+                continue;
             }
             else
             {
                 yield return FailSpawn();
+                continue;
             }
 
         }
@@ -163,6 +174,7 @@ public class ObjectSpawnController : MonoBehaviour
         Debug.Log("FAIL Spawn - WaitFor: " + t);
         return new WaitForSeconds(t);
     }
+
     WaitForSeconds SuccessSpawn()
     {
         lastSpawnFailed = false;
@@ -173,7 +185,7 @@ public class ObjectSpawnController : MonoBehaviour
 
     void SpawnObject(GameObject  obj, Vector3 position)
     {
-        Instantiate(obj, position, new Quaternion());
+        spawnedObject = Instantiate(obj, position, new Quaternion());
     }
 
     protected virtual Vector3 CalculateSpawnPosition(GameObject obj)
@@ -190,24 +202,37 @@ public class ObjectSpawnController : MonoBehaviour
         var area = selection[UnityEngine.Random.Range(0, selection.Count - 1)];
         var b = area.bounds;
         var relativePoint = new Vector3(
-            UnityEngine.Random.Range(b.min.x, b.max.x),
+            UnityEngine.Random.Range(b.min.x, b.max.x)-b.center.x,
             0,
-            UnityEngine.Random.Range(b.min.z, b.max.z));
+            UnityEngine.Random.Range(b.min.z, b.max.z)-b.center.z);
+
         Vector3 point = area.transform.position + relativePoint;
         var vToPlayer = point - player.transform.position;
         vToPlayer.y = 0;
-        // Disregard spawn zones.. if spawn zones are placed equally it should work fine
+        // if spawn zones are placed equally and reasonable small it should work fine
+        // If point outside of target range was picked find nearest/farthest point in spawn area
+        RaycastHit hit;
         if (vToPlayer.magnitude < data.minSpawnDistance)
         {
             // To close shift backwards
-            point = player.transform.position +  (vToPlayer.normalized * data.minSpawnDistance);
+            float dist = data.minSpawnDistance;
+            if(Physics.Raycast(player.transform.position, vToPlayer, out hit, data.minSpawnDistance))
+            {
+                dist = Math.Min(dist, (hit.point - player.transform.position).magnitude);
+            }
+            point = player.transform.position +  (vToPlayer.normalized * dist);
         }
         else if(vToPlayer.magnitude > data.maxSpawnDistance)
         {
             // to far shift forwards
-            point = player.transform.position + (vToPlayer.normalized * data.maxSpawnDistance);
+            float dist = data.maxSpawnDistance;
+            if (Physics.Raycast(player.transform.position, -vToPlayer, out hit, data.maxSpawnDistance))
+            {
+                dist = Math.Min(dist, (hit.point - player.transform.position).magnitude);
+            }
+            point = player.transform.position + (-vToPlayer.normalized * dist);
         }
-        RaycastHit hit;
+       
         Vector3 ceilingPoint = new Vector3(point.x, b.max.y, point.z);
         if (data.canSpawnInAir)
         {
