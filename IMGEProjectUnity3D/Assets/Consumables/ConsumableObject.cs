@@ -75,5 +75,5 @@ public class ConsumableObject : MonoBehaviour
         {
             UseConsumable();
         }
- 
+    }
  */
