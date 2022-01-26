@@ -1222,6 +1222,18 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1448548711621154765, guid: 6b79d88b3c6ccb94391202a3c086289c, type: 3}
+      propertyPath: maxTimeBetweenWaves
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1448548711621154765, guid: 6b79d88b3c6ccb94391202a3c086289c, type: 3}
+      propertyPath: minTimeBetweenWaves
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1448548711621154765, guid: 6b79d88b3c6ccb94391202a3c086289c, type: 3}
+      propertyPath: maxTimeBetweenSpawns
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1448548711621154765, guid: 6b79d88b3c6ccb94391202a3c086289c, type: 3}
       propertyPath: objects.Array.data[0]
       value: 
       objectReference: {fileID: 6692821013577585914, guid: 5485d612ca98d3f4e9c8c30165e4f504, type: 3}
@@ -1319,7 +1331,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7984301691748037122, guid: 6b79d88b3c6ccb94391202a3c086289c, type: 3}
       propertyPath: m_Name
-      value: Fast_EnemySpawnController
+      value: Fast_EnemySpawnController Variant
       objectReference: {fileID: 0}
     - target: {fileID: 8751773231402421970, guid: 6b79d88b3c6ccb94391202a3c086289c, type: 3}
       propertyPath: m_LocalScale.x

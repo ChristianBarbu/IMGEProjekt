@@ -259,7 +259,8 @@ public class ObjectSpawnController : MonoBehaviour
     void SelectRandomObjectByWeight()
     {
         var v = UnityEngine.Random.value * combinedObjectWeight;
-        selectedObject = objectData.FirstOrDefault(e => v >= (combinedObjectWeight -= e.Value.weight)).Key;
+        double s = 0;
+        selectedObject = objectData.FirstOrDefault(e => (s += e.Value.weight)>v).Key;
     }
 
     bool IsToCheap(GameObject  obj)

@@ -53,11 +53,10 @@ public class NavMeshAgentEnemy : Enemy
 
     public override void SetActive(bool b)
     {
+        if(agent == null)
+            agent = GetComponent<NavMeshAgent>();
         agent.enabled = true;
     }
 
-    public override void Attack()
-     {
-       // throw new System.NotImplementedException();
-    }
+
 }

@@ -12,6 +12,7 @@ public class Enemy : MonoBehaviour
     public float targetDistanceToPlayer;
     public float attackRange;
     public float attackCoolDown;
+    public EnemyAttack attack;
 
     public IObservable<bool> PlayerInRange { get; private set; }
     public ReactiveProperty<bool> OnCoolDown { get; private set; }
@@ -22,6 +23,7 @@ public class Enemy : MonoBehaviour
 
     protected GameObject player;
     private float cdWaited;
+
 
     public virtual void Start()
     {
@@ -48,6 +50,7 @@ public class Enemy : MonoBehaviour
             }
             else
                 cdWaited = 0;
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(player.transform.position - transform.position), Time.deltaTime);
         }).AddTo(this);
 
     }
@@ -80,7 +83,7 @@ public class Enemy : MonoBehaviour
 
 
     public virtual void SetActive(bool b) { }
-    public virtual void Attack() { }
+    public virtual void Attack() { attack?.Attack((player.transform.position - transform.position).normalized); }
 
  
 }
