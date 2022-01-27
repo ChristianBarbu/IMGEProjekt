@@ -210,7 +210,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4127559857393649014, guid: 6bb9647507ae0d246be2672c70fe2945, type: 3}
       propertyPath: m_RootOrder
-      value: 14
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 4127559857393649014, guid: 6bb9647507ae0d246be2672c70fe2945, type: 3}
       propertyPath: m_LocalPosition.x
@@ -257,6 +257,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2089159714}
     - target: {fileID: 4872822936394408123, guid: 6bb9647507ae0d246be2672c70fe2945, type: 3}
+      propertyPath: startCredits
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4872822936394408123, guid: 6bb9647507ae0d246be2672c70fe2945, type: 3}
       propertyPath: objects.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -264,6 +268,10 @@ PrefabInstance:
       propertyPath: objects.Array.data[1]
       value: 
       objectReference: {fileID: 8171995300918970481, guid: b8555530bafbff847ae70c05bcb986f6, type: 3}
+    - target: {fileID: 8821566083362876650, guid: 6bb9647507ae0d246be2672c70fe2945, type: 3}
+      propertyPath: creditMultiplier
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6bb9647507ae0d246be2672c70fe2945, type: 3}
 --- !u!1001 &8430188
@@ -8791,7 +8799,7 @@ Transform:
   - {fileID: 2130915156}
   - {fileID: 1532984440}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &688581433 stripped
 Transform:
@@ -19387,7 +19395,7 @@ Transform:
   - {fileID: 1452633471}
   - {fileID: 1376099292}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1532984439
 GameObject:
@@ -19473,7 +19481,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4887326035956453840, guid: 79401eaee9d10ff418956ee7161bdcb0, type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 4887326035956453840, guid: 79401eaee9d10ff418956ee7161bdcb0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -19556,7 +19564,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1557062405
 PrefabInstance:
@@ -26023,7 +26031,7 @@ Transform:
   - {fileID: 999975669}
   - {fileID: 67953911}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2104709420
 PrefabInstance:
