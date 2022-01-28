@@ -73,3 +73,4 @@ crashlytics-build.properties
 # IDEA Rider Stuff
 /[Aa]ssets/[Ss]cripts/.idea
 **/.idea
+IMGEProjectUnity3D/Assets/Plugins/
