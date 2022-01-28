@@ -16,6 +16,15 @@ public class Enemy : MonoBehaviour
     public float targetDistanceToPlayer;
     public float attackRange;
     public float attackCoolDown;
+
+    protected float speed;
+
+    public virtual float Speed
+    {
+        get => speed;
+        set => speed = value;
+    }
+
     public EnemyAttack attack;
 
     public IObservable<bool> PlayerInRange { get; private set; }
