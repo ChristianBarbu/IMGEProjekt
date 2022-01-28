@@ -1,11 +1,33 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UniRx;
 using UnityEngine;
 
 public class GameData : SingletonMonoBehaviour<GameData>
 {
+    private GameData()
+    {
+        EnemyCount = 0;
+        CollectableCunt = 0;
+        _difficultyScaling.Value = 1;
+    }
+    
+    private ReactiveProperty<float> _difficultyScaling = new ReactiveProperty<float>();
+    public ReactiveProperty<float> DifficultyScaling
+    {
+        get { return _difficultyScaling; }
+        private set { _difficultyScaling = value; }
+    }
+
+    public int EnemyCount
+    {
+        get;set;
+    }
+
+    public int CollectableCunt
+    {
+        get;set;
+    }
+
     public ReactiveProperty<int> score = new ReactiveProperty<int>(0);
     
     public ReactiveProperty<float> health = new ReactiveProperty<float>(5);
