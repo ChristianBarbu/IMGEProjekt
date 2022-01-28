@@ -9,6 +9,10 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
 
+    public Sensor sensor;
+    public float playerHealthDecrease;
+    public float playerShieldDecrese;
+    
     public float targetDistanceToPlayer;
     public float attackRange;
     public float attackCoolDown;
@@ -28,7 +32,7 @@ public class Enemy : MonoBehaviour
     public virtual void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-
+        sensor.SensorTriggered.Subscribe(HitSignalDetected).AddTo(this);
         CanAttackPlayer.Subscribe(b =>
         {
             if (b)
@@ -53,6 +57,31 @@ public class Enemy : MonoBehaviour
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(player.transform.position - transform.position), Time.deltaTime);
         }).AddTo(this);
 
+    }
+    
+    public void Hit()
+    {
+        var currentHealth = Mathf.Clamp(GameData.Instance.Health, 0, 1);
+        var currentShield = Mathf.Clamp(GameData.Instance.Shield, 0, 1);
+
+        Debug.Log("currentHealth = " + currentHealth);
+        Debug.Log("currentShield = " + currentShield);
+        
+        if (currentHealth >= 1 && currentShield > 0)
+        {
+            GameData.Instance.DecreaseShield(playerShieldDecrese);
+        }
+        else
+        {
+            GameData.Instance.DecreaseHealth(playerHealthDecrease); 
+        }
+    }
+
+    void HitSignalDetected(EventArgs args)
+    {
+        Hit();
+        gameObject.SetActive(false);
+        // why dont we delete it here?
     }
 
 
