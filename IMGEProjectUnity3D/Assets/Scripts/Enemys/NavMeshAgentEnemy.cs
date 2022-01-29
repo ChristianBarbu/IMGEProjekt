@@ -7,13 +7,22 @@ public class NavMeshAgentEnemy : Enemy
 {
     NavMeshAgent agent;
     private int skipped = 0;
-
+    
     public override void Start()
     {
         base.Start();
         agent = GetComponent<NavMeshAgent>();
     }
 
+    public override float Speed
+    {
+        get { return speed;}
+        set
+        {
+            speed = value;
+            agent.speed = value;
+        }
+    }
 
     private void Update()
     {

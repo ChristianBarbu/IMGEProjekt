@@ -33,11 +33,11 @@ public class Freeze : MonoBehaviour
     {
         float curSpeed = 0;
         if (_enemies.Count > 0)
-            curSpeed = _enemies[0].speed;
+            curSpeed = _enemies[0].Speed;
         
         foreach (var enemy in _enemies)
         {
-            enemy.speed = 0;
+            enemy.Speed = 0;
         }
 
         Debug.Log("Time.timeScale = " + Time.timeScale);
@@ -46,7 +46,7 @@ public class Freeze : MonoBehaviour
 
         foreach (var enemy in _enemies)
         {
-            enemy.speed = curSpeed;
+            enemy.Speed = curSpeed;
         }
         
         // destroy or deactivate parent of snowflake

@@ -40,7 +40,11 @@ namespace DyrdaDev.FirstPersonController
         private GameObject _cam;
 
         private int index = 0;
+        [SerializeField]
+        private int sprintDur;
         private int cooldown = 0;
+        [SerializeField]
+        private int sprintCooldown;
 
         #endregion
 
@@ -56,7 +60,6 @@ namespace DyrdaDev.FirstPersonController
         [SerializeField] private float runSpeed = 10f;
         [SerializeField] private float jumpForceMagnitude = 10f;
         [SerializeField] private float strideLength = 4f;
-        [SerializeField] private GameObject shot;
         public float StrideLength => strideLength;
 
         ReactiveProperty<bool> ICharacterSignals.IsUsingAbility => throw new NotImplementedException();
@@ -135,6 +138,16 @@ namespace DyrdaDev.FirstPersonController
                         cooldown--;
                     }
 
+                    if (sprintDur == 200)
+                    {
+                        sprintDur = 0;
+                        sprintCooldown = 200;
+                    }
+                    else if (sprintCooldown > 0)
+                    {
+                        sprintCooldown--;
+                    }
+
 
                     var wasGrounded = _characterController.isGrounded;
 
@@ -188,7 +201,15 @@ namespace DyrdaDev.FirstPersonController
                     else
                     {
                         // Horizontal movement:
-                        currentSpeed = firstPersonControllerInput.Run.Value ? runSpeed : walkSpeed;
+                        if (firstPersonControllerInput.Run.Value && sprintDur <= 500 && sprintCooldown == 0)
+                        {
+                            currentSpeed = runSpeed;
+                            sprintDur++;
+                        }
+                        else
+                        {
+                            currentSpeed = walkSpeed;
+                        }
                     }
 
 
@@ -212,7 +233,7 @@ namespace DyrdaDev.FirstPersonController
 
             {
                 if (input)
-                    Instantiate(shot, new Vector3(this.transform.position.x + 1, this.transform.position.y, this.transform.position.z), Quaternion.identity);
+                    Debug.Log("Shoot");
             }
             ).AddTo(this);
 
