@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1798976787329361030}
   - component: {fileID: 1798976787329361031}
   - component: {fileID: 1798976787329361026}
+  - component: {fileID: 4970924928082877608}
   m_Layer: 0
   m_Name: BigCoin
   m_TagString: Untagged
@@ -125,3 +126,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68510e3fe9388a041a15d8fda589680a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4970924928082877608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1798976787329361028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b265a6d6024a72643b4c55b4b2ece2cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cost: 20
+  weight: 20
+  minSpawnDistance: 200
+  maxSpawnDistance: 600
+  canSpawnInAir: 0
+  conditions: []

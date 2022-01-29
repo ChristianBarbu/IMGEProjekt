@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4190284202195562368}
   - component: {fileID: 4190284202195562375}
   - component: {fileID: 4190284202195562380}
+  - component: {fileID: 3670854046538233474}
   m_Layer: 0
   m_Name: SmallCoin
   m_TagString: Untagged
@@ -125,3 +126,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68510e3fe9388a041a15d8fda589680a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3670854046538233474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4190284202195562374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b265a6d6024a72643b4c55b4b2ece2cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cost: 10
+  weight: 50
+  minSpawnDistance: 50
+  maxSpawnDistance: 400
+  canSpawnInAir: 0
+  conditions: []

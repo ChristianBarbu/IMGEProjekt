@@ -171,7 +171,7 @@ public class ObjectSpawnController : MonoBehaviour
         lastSpawnFailed = true;
         selectedObject = null;
         var t = GetWaveInactiveTime();
-        Debug.Log("FAIL Spawn - WaitFor: " + t);
+        Debug.Log(gameObject.name+" FAIL Spawn - WaitFor: " + t);
         return new WaitForSeconds(t);
     }
 
@@ -179,7 +179,7 @@ public class ObjectSpawnController : MonoBehaviour
     {
         lastSpawnFailed = false;
         var t = GetSpawnInactiveTime();
-        Debug.Log("SUCCESS Spawn - WaitFor: " + t);
+        Debug.Log(gameObject.name + " SUCCESS Spawn - WaitFor: " + t);
         return new WaitForSeconds(t);
     }
 
@@ -267,7 +267,7 @@ public class ObjectSpawnController : MonoBehaviour
     {
         var c = (float)objectData[obj].cost * ToCheapMultiplier <= credits && objectData[obj].cost != mostExpensiveCosts;
         if (c)
-            Debug.Log("FAIL - To Cheap");
+            Debug.Log(gameObject.name + " FAIL - To Cheap");
         return c;
     }
 
@@ -275,7 +275,7 @@ public class ObjectSpawnController : MonoBehaviour
     {
         var c = objectData[obj].cost <= credits;
         if (!c)
-            Debug.Log("FAIL - Not Affordable");
+            Debug.Log(gameObject.name + "FAIL - Not Affordable");
         return c;
     }
 
@@ -283,7 +283,7 @@ public class ObjectSpawnController : MonoBehaviour
     {
         var c = !objectData[obj].conditions.Any(c => !c.CanSpawn());
         if(!c)
-            Debug.Log("FAIL - Condition");
+            Debug.Log(gameObject.name+" FAIL - Condition");
         return c;
     }
 

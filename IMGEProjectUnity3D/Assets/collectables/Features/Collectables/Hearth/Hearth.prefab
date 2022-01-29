@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 287686179183748870}
   - component: {fileID: 7031274084121210414}
   - component: {fileID: 2092240055314576139}
+  - component: {fileID: 8427746918623923735}
   m_Layer: 0
   m_Name: Hearth
   m_TagString: Untagged
@@ -126,3 +127,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68510e3fe9388a041a15d8fda589680a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8427746918623923735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8735334792600208234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b265a6d6024a72643b4c55b4b2ece2cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cost: 50
+  weight: 10
+  minSpawnDistance: 300
+  maxSpawnDistance: 800
+  canSpawnInAir: 0
+  conditions: []
