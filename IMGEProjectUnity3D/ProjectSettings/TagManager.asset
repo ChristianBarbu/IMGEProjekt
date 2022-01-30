@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Climb
+  - Enemy
   layers:
   - Default
   - TransparentFX

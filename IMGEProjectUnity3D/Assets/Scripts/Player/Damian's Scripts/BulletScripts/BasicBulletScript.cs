@@ -5,6 +5,7 @@ using UnityEngine;
 public class BasicBulletScript : MonoBehaviour
 {   
     public GameObject Pew;
+    public float Dmg = 25;
 
     private void Start()
     {
@@ -30,7 +31,10 @@ public class BasicBulletScript : MonoBehaviour
 
     private void OnHitEnter(Collider other)
     {
-      
+        if(other.tag == "Enemy")
+        {
+            other.gameObject.GetComponent<Enemy>().Health.Value -= Dmg;
+        }
         //insert damage functionality
         Pew = Instantiate(Pew, this.gameObject.transform.position, this.gameObject.transform.rotation);
         Pew.transform.forward = this.transform.forward * (-1);

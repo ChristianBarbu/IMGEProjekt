@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 818028750302048402}
   - component: {fileID: 818028750302048403}
   - component: {fileID: 818028750302048400}
-  - component: {fileID: 592560701194273130}
+  - component: {fileID: 494141112237791871}
   m_Layer: 0
   m_Name: Medium_Bullet
   m_TagString: Untagged
@@ -98,7 +98,7 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &592560701194273130
+--- !u!114 &494141112237791871
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -107,6 +107,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 818028750302048406}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33b9b124d483c9b4db5f0e065647ef6e, type: 3}
+  m_Script: {fileID: 11500000, guid: 02c12a9b484409342af8427ff84a396c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Dmg: 50
+  Pew: {fileID: 2089261457517816185, guid: fb3131a34cbe4ea45acbc6beb0b0a4ea, type: 3}

@@ -2,8 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BasicBulletScript : MonoBehaviour
-{   
+public class MediumBulletScript : MonoBehaviour
+{
+    private int EntityCount = 1;
+    public float Dmg = 50;
+
     public GameObject Pew;
 
     private void Start()
@@ -11,14 +14,12 @@ public class BasicBulletScript : MonoBehaviour
         Invoke(nameof(Death), 7.5f);
     }
 
-    
-
     void Update()
     {
         RaycastHit hit;
-        
+
         if (Physics.Raycast(this.transform.position, Vector3.forward, out hit, Time.deltaTime * 50, ~10, QueryTriggerInteraction.Ignore))
-        { 
+        {
             this.transform.position = hit.point;
             OnHitEnter(hit.collider);
         }
@@ -30,11 +31,18 @@ public class BasicBulletScript : MonoBehaviour
 
     private void OnHitEnter(Collider other)
     {
-      
-        //insert damage functionality
-        Pew = Instantiate(Pew, this.gameObject.transform.position, this.gameObject.transform.rotation);
-        Pew.transform.forward = this.transform.forward * (-1);
-        Death();
+        //insert Damage Function here
+        if (other.tag == "Enemy" && EntityCount != 0)
+        {
+            EntityCount--;
+            other.gameObject.GetComponent<Enemy>().Health.Value -= Dmg;
+        }
+        else
+        {
+            Pew = Instantiate(Pew, this.gameObject.transform.position, this.gameObject.transform.rotation);
+            Pew.transform.forward = this.transform.forward * (-1);
+            Death();
+        }   
     }
 
     private void Death()

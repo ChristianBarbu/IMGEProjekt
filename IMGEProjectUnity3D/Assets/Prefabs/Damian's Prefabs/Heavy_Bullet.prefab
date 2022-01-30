@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7754914185318449335}
   - component: {fileID: 7754914185318449334}
   - component: {fileID: 7754914185318449333}
-  - component: {fileID: 9061740782416350003}
+  - component: {fileID: 3307579603197127573}
   m_Layer: 0
   m_Name: Heavy_Bullet
   m_TagString: Untagged
@@ -98,7 +98,7 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &9061740782416350003
+--- !u!114 &3307579603197127573
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -107,6 +107,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 7754914185318449331}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6b5b63e48df6e14a8ecb9d39b19e703, type: 3}
+  m_Script: {fileID: 11500000, guid: 6b824aea464db8d47a96a2637a3e7e76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Dmg: 100
+  Pew: {fileID: 2089261457517816185, guid: fb3131a34cbe4ea45acbc6beb0b0a4ea, type: 3}

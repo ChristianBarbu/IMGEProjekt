@@ -1,7 +1,8 @@
-﻿using UniRx;
+﻿
 using UnityEngine;
+using UniRx;
 
-    [RequireComponent(typeof(AudioSource))]
+[RequireComponent(typeof(AudioSource))]
     public class CharacterMovementAudio : MonoBehaviour
     {
         [Header("References")]
