@@ -12,7 +12,7 @@ public class Enemy : MonoBehaviour
     public Sensor sensor;
     public float playerHealthDecrease;
     public float playerShieldDecrese;
-    
+
     public float targetDistanceToPlayer;
     public float attackRange;
     public float attackCoolDown;
@@ -38,7 +38,7 @@ public class Enemy : MonoBehaviour
     public ReactiveProperty<float> Health { get; set; }
 
     protected float distanceToPlayer;
-  
+
 
     protected GameObject player;
     private float cdWaited;
@@ -56,7 +56,7 @@ public class Enemy : MonoBehaviour
                 OnCoolDown.Value = true;
             }
         }).AddTo(this);
-        this.UpdateAsObservable().Subscribe(_=>
+        this.UpdateAsObservable().Subscribe(_ =>
         {
             if (OnCoolDown.Value)
             {
@@ -72,10 +72,10 @@ public class Enemy : MonoBehaviour
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(player.transform.position - transform.position), Time.deltaTime);
         }).AddTo(this);
 
-        Health.Where(h=>h<=0).Subscribe(_=> Destroy(gameObject)).AddTo(this);
+        Health.Where(h => h <= 0).Subscribe(_ => Destroy(gameObject)).AddTo(this);
 
     }
-    
+
     public void Hit()
     {
         var currentHealth = Mathf.Clamp(GameData.Instance.Health, 0, 1);
@@ -83,14 +83,14 @@ public class Enemy : MonoBehaviour
 
         Debug.Log("currentHealth = " + currentHealth);
         Debug.Log("currentShield = " + currentShield);
-        
+
         if (currentHealth >= 1 && currentShield > 0)
         {
             GameData.Instance.DecreaseShield(playerShieldDecrese);
         }
         else
         {
-            GameData.Instance.DecreaseHealth(playerHealthDecrease); 
+            GameData.Instance.DecreaseHealth(playerHealthDecrease);
         }
     }
 
@@ -102,7 +102,7 @@ public class Enemy : MonoBehaviour
     }
 
 
-   
+
 
     public void Awake()
     {
@@ -121,7 +121,7 @@ public class Enemy : MonoBehaviour
             return false;
         }).AsObservable();
 
-        CanAttackPlayer = Observable.CombineLatest(PlayerInRange,OnCoolDown.Select(b=>!b)).Select(l => !l.Any(b => !b));
+        CanAttackPlayer = Observable.CombineLatest(PlayerInRange, OnCoolDown.Select(b => !b)).Select(l => !l.Any(b => !b));
 
 
 
@@ -132,5 +132,5 @@ public class Enemy : MonoBehaviour
     public virtual void SetActive(bool b) { }
     public virtual void Attack() { attack?.Attack((player.transform.position - transform.position).normalized); }
 
- 
+
 }
