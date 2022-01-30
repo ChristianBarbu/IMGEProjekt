@@ -42,15 +42,28 @@ public class EnemyPlasmaProjectile: MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (hitSound != null)
+        if (collision.gameObject.tag == "Player")
         {
-            hitSound.Play();
-            Destroy(gameObject, hitSound.clip.length);
+            if (hitSound != null)
+            {
+                hitSound.Play();
+                Destroy(gameObject, hitSound.clip.length);
+            }
+            Destroy(gameObject);
         }
     }
     private void OnTriggerEnter(Collider other)
     {
-        
+        if (other.tag == "Player")
+        {
+            if (hitSound != null)
+            {
+                hitSound.Play();
+                Destroy(gameObject, hitSound.clip.length);
+            }
+            else
+                Destroy(gameObject);
+        }
     }
     public void AddForce(float force)
     {
