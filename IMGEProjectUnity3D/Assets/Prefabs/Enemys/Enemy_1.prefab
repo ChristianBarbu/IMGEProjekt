@@ -91,11 +91,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sensor: {fileID: 8958666414808564555}
-  playerHealthDecrease: 0
-  playerShieldDecrese: 0
+  playerHealthDecrease: 1
+  playerShieldDecrese: 1
   targetDistanceToPlayer: 1
   attackRange: 1
   attackCoolDown: 4
+  health: 100
   attack: {fileID: 0}
 --- !u!82 &3257042645931119939
 AudioSource:

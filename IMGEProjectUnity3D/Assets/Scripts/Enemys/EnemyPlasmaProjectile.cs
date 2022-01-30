@@ -18,6 +18,8 @@ public class EnemyPlasmaProjectile: MonoBehaviour
     private Transform player;
     private Rigidbody rb;
 
+    public Enemy Enemy { get; set; }    
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -44,6 +46,7 @@ public class EnemyPlasmaProjectile: MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
+            Enemy?.Hit();
             if (hitSound != null)
             {
                 hitSound.Play();
@@ -56,6 +59,7 @@ public class EnemyPlasmaProjectile: MonoBehaviour
     {
         if (other.tag == "Player")
         {
+            Enemy?.Hit();
             if (hitSound != null)
             {
                 hitSound.Play();

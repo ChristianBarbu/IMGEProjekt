@@ -17,6 +17,9 @@ public class Enemy : MonoBehaviour
     public float attackRange;
     public float attackCoolDown;
 
+    public float health;
+
+
     protected float speed;
 
     public virtual float Speed
@@ -31,6 +34,9 @@ public class Enemy : MonoBehaviour
     public ReactiveProperty<bool> OnCoolDown { get; private set; }
     public IObservable<bool> CanAttackPlayer { get; protected set; }
 
+
+    public ReactiveProperty<float> Health { get; set; }
+
     protected float distanceToPlayer;
   
 
@@ -41,7 +47,7 @@ public class Enemy : MonoBehaviour
     public virtual void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        sensor.SensorTriggered.Subscribe(HitSignalDetected).AddTo(this);
+        sensor?.SensorTriggered?.Subscribe(HitSignalDetected)?.AddTo(this);
         CanAttackPlayer.Subscribe(b =>
         {
             if (b)
@@ -65,6 +71,8 @@ public class Enemy : MonoBehaviour
                 cdWaited = 0;
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(player.transform.position - transform.position), Time.deltaTime);
         }).AddTo(this);
+
+        Health.Where(h=>h<=0).Subscribe(_=> Destroy(gameObject)).AddTo(this);
 
     }
     
@@ -100,6 +108,7 @@ public class Enemy : MonoBehaviour
     {
         OnCoolDown = new ReactiveProperty<bool>();
         OnCoolDown.Value = false;
+        Health = new ReactiveProperty<float>() { Value = health };
 
 
         PlayerInRange = this.UpdateAsObservable().Select(_ =>

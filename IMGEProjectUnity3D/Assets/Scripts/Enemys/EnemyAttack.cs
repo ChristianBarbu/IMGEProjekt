@@ -5,6 +5,9 @@ using UnityEngine;
 public abstract class EnemyAttack : MonoBehaviour
 {
     protected Transform player;
+
+    public Enemy Enemy { get; set; }
+
     public void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
