@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
@@ -59,7 +60,12 @@ using UnityEngine;
         [SerializeField] private float walkSpeed = 20f;
         [SerializeField] private float runSpeed = 10f;
         [SerializeField] private float jumpForceMagnitude = 10f;
+        
         [SerializeField] private float strideLength = 4f;
+        [SerializeField] private float speedMultiplier = 1f;
+        [SerializeField] private bool jetpacks = false;
+        [SerializeField] private float timeChange = 1f;
+        [SerializeField] private float jetpackBoost = 0.5f;
         public float StrideLength => strideLength;
 
         ReactiveProperty<bool> ICharacterSignals.IsUsingAbility => throw new NotImplementedException();
@@ -75,6 +81,8 @@ using UnityEngine;
         private GameObject currentWeapon;
 
         public GameObject[] Weapons = new GameObject[6];
+
+        public ConsumableObject consumable;
 
         private void Awake()
         {
@@ -164,6 +172,7 @@ using UnityEngine;
                     var wasGrounded = _characterController.isGrounded;
 
                     // Vertical movement:
+                    
                     var verticalVelocity = 0f;
                     // The character is ...
                     RaycastHit hit;
@@ -171,6 +180,10 @@ using UnityEngine;
                     if (firstPersonControllerInput.Jump2.Value && Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 1) && hit.transform.gameObject.CompareTag("Climb"))
                     {
                         verticalVelocity += jumpForceMagnitude + 1;
+                    }
+                    else if (jetpacks && firstPersonControllerInput.Jump2.Value)
+                    {
+                        verticalVelocity += jetpackBoost;
                     }
                     else if (i.Jump && wasGrounded)
                     {
@@ -186,6 +199,7 @@ using UnityEngine;
                         verticalVelocity = _characterController.velocity.y + Physics.gravity.y * Time.deltaTime * 3.0f;
 
                     }
+                    
                     else
                     {
                         // ... otherwise grounded.
@@ -224,6 +238,8 @@ using UnityEngine;
                         }
                     }
 
+                    currentSpeed = currentSpeed * timeChange * speedMultiplier;
+
 
                     var horizontalVelocity = i.Move * currentSpeed; //Calculate velocity (direction * speed).
 
@@ -258,13 +274,53 @@ using UnityEngine;
             firstPersonControllerInput.UseAbility.Subscribe(input =>
             {
                 if (input)
-                    Debug.Log("Use Ability");
+                {
+                    switch (consumable.type)
+                    {
+                        case ConsumableTypes.Speedbooster:
+                            speedMultiplier = 1.6f;
+                            StartCoroutine(Timer(15));
+                            break;
+                        case ConsumableTypes.Scorebooster:
+                            //
+                            break;
+                        case ConsumableTypes.Shield:
+                            //
+                            break;
+                        case ConsumableTypes.Rockets:
+
+                            break;
+                        case ConsumableTypes.TimeLapse:
+                            timeChange = 5f;
+                            Time.timeScale = 0.2f;
+                            StartCoroutine(Timer(10));
+                            break;
+                        case ConsumableTypes.Jetpack:
+                            jetpacks = true;
+                            StartCoroutine(Timer(20));
+                            break;
+                    }
+                }
             }
             ).AddTo(this);
 
 
         }
 
+        private void ReturnConsumableValues()
+        {
+            speedMultiplier = 1f;
+            timeChange = 1f;
+            Time.timeScale = 1f;
+            jetpacks = false;
+        }
+
+        private IEnumerator Timer(int seconds)
+        {
+            yield return new WaitForSeconds(seconds);
+            ReturnConsumableValues();
+        }
+        
         private void HandleLocomotionCharacterSignalsIteration(bool wasGrounded, bool isGrounded)
         {
             var tempIsRunning = false;
