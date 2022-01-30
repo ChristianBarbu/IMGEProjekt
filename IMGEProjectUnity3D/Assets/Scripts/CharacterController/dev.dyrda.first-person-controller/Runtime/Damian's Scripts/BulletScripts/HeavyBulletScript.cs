@@ -8,14 +8,19 @@ public class HeavyBulletScript : MonoBehaviour
 
     public GameObject Pew;
 
+    private void Start()
+    {
+        Invoke(nameof(Death), 7.5f);
+    }
+
     void Update()
     {
         RaycastHit hit;
 
-        if (Physics.Raycast(this.transform.position, Vector3.forward, out hit, Time.deltaTime * 50))
+        if (Physics.Raycast(this.transform.position, Vector3.forward, out hit, Time.deltaTime * 50, ~10, QueryTriggerInteraction.Ignore))
         {
             this.transform.position = hit.point;
-            OnTriggerEnter(hit.collider);
+            OnHitEnter(hit.collider);
         }
         else
         {
@@ -23,7 +28,7 @@ public class HeavyBulletScript : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnHitEnter(Collider other)
     {
         //insert Damage Function here
         if (other.tag == "Enemy" && EntityCount != 0)
@@ -34,7 +39,12 @@ public class HeavyBulletScript : MonoBehaviour
         {
             Pew = Instantiate(Pew, this.gameObject.transform.position, this.gameObject.transform.rotation);
             Pew.transform.forward = this.transform.forward * (-1);
-            Destroy(this.gameObject);
+            Death();
         }
+    }
+
+    private void Death()
+    {
+        Destroy(this.gameObject);
     }
 }
