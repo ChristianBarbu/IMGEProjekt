@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 2421680917385778097}
   - component: {fileID: 2584836059696903313}
   - component: {fileID: 4074457815656265854}
+  - component: {fileID: 7130884608574382202}
   - component: {fileID: 1638706285133353024}
   - component: {fileID: 280089597065175646}
   m_Layer: 0
@@ -123,6 +124,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d77bede6611f59445b62a4029b57322b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sensor: {fileID: 7130884608574382202}
+  playerHealthDecrease: 0
+  playerShieldDecrese: 0
   targetDistanceToPlayer: 100
   attackRange: 140
   attackCoolDown: 3
@@ -246,6 +250,18 @@ CapsuleCollider:
   m_Height: 1.2
   m_Direction: 2
   m_Center: {x: 0, y: 0.2, z: -0.18370008}
+--- !u!114 &7130884608574382202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3615865254344240616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68510e3fe9388a041a15d8fda589680a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!136 &1638706285133353024
 CapsuleCollider:
   m_ObjectHideFlags: 0

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3420466610782106211}
   - component: {fileID: 3257042645931119939}
   - component: {fileID: 3920128938405140908}
+  - component: {fileID: 8958666414808564555}
   m_Layer: 0
   m_Name: Enemy_1
   m_TagString: Untagged
@@ -89,9 +90,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d77bede6611f59445b62a4029b57322b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sensor: {fileID: 8958666414808564555}
+  playerHealthDecrease: 0
+  playerShieldDecrese: 0
   targetDistanceToPlayer: 1
   attackRange: 1
   attackCoolDown: 4
+  attack: {fileID: 0}
 --- !u!82 &3257042645931119939
 AudioSource:
   m_ObjectHideFlags: 0
@@ -211,6 +216,18 @@ CapsuleCollider:
   m_Height: 1.2
   m_Direction: 2
   m_Center: {x: 0, y: 0.2, z: -0.18370008}
+--- !u!114 &8958666414808564555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4378162937005788218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68510e3fe9388a041a15d8fda589680a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1507640123101825504
 PrefabInstance:
   m_ObjectHideFlags: 0
