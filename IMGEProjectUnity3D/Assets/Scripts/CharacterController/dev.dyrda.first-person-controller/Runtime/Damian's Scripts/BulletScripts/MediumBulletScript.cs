@@ -29,6 +29,7 @@ public class MediumBulletScript : MonoBehaviour
         if (other.tag == "Enemy" && EntityCount != 0)
         {
             EntityCount--;
+
         }
         else
         {

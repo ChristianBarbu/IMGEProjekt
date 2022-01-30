@@ -73,7 +73,9 @@ namespace DyrdaDev.FirstPersonController
 
         #endregion
 
-        public GameObject weapon;
+        private GameObject currentWeapon;
+
+        public GameObject[] Weapons = new GameObject[6];
 
         private void Awake()
         {
@@ -87,6 +89,7 @@ namespace DyrdaDev.FirstPersonController
             _stepped = new Subject<Unit>().AddTo(this);
             crouched = false;
 
+            currentWeapon = Weapons[5];
         }
 
         private void Start()
@@ -98,6 +101,13 @@ namespace DyrdaDev.FirstPersonController
             HandleLook();
         }
 
+        public void ChangeWeapon(int weaponId)
+        {
+            this.currentWeapon.GetComponent<WeaponController>().stopShooting();
+            this.currentWeapon.gameObject.SetActive(false);
+            this.currentWeapon = Weapons[weaponId];
+            this.currentWeapon.gameObject.SetActive(true);
+        }
 
         private void HandleLocomotion()
         {
@@ -237,10 +247,10 @@ namespace DyrdaDev.FirstPersonController
             {
                 if (input)
                 {
-                    this.weapon.GetComponent<WeaponController>().startShooting();
+                    this.currentWeapon.GetComponent<WeaponController>().startShooting();
                 } else
                 {
-                    this.weapon.GetComponent<WeaponController>().stopShooting();
+                    this.currentWeapon.GetComponent<WeaponController>().stopShooting();
                 }
                     
             }
