@@ -321,15 +321,16 @@ namespace DyrdaDev.FirstPersonController
                     // Translate 2D mouse input into euler angle rotations.
 
                     // Horizontal look with rotation around the vertical axis, where + means clockwise.
-                    var horizontalLook = inputLook.x * Vector3.up * Time.deltaTime * 100;
-                    transform.localRotation *= Quaternion.Euler(horizontalLook);
+                    var horizontalLook = inputLook.x * Vector3.up * Time.deltaTime;
+                    transform.localRotation *= Quaternion.Euler(horizontalLook/* * 100 */);
 
                     // Vertical look with rotation around the horizontal axis, where + means upwards.
-                    var verticalLook = inputLook.y * Vector3.left * Time.deltaTime * 100;
-                    var newQ = _camera.transform.localRotation * Quaternion.Euler(verticalLook);
+                    var verticalLook = inputLook.y * Vector3.left * Time.deltaTime;
+                    var newQ = _camera.transform.localRotation * Quaternion.Euler(verticalLook/* * 100 */);
 
                     _camera.transform.localRotation =
                         RotationTools.ClampRotationAroundXAxis(newQ, -maxViewAngle, -minViewAngle);
+
                 }).AddTo(this);
         }
 
