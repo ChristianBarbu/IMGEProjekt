@@ -2,7 +2,6 @@
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
-using weapon;
 
 
 namespace DyrdaDev.FirstPersonController
@@ -238,7 +237,7 @@ namespace DyrdaDev.FirstPersonController
             {
                 if (input)
                 {
-                    this.weapon.GetComponent<>().startShooting();
+                    this.weapon.GetComponent<WeaponController>().startShooting();
                 } else
                 {
                     this.weapon.GetComponent<WeaponController>().stopShooting();

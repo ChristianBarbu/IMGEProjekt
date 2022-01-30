@@ -1,16 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using weapon;
 
-public class MinigunController : WeaponController
+public class SniperController : WeaponController
 {
     public override void fireShots()
     {
         Instantiate(this.bullet, bulletSpawn.transform.position, bulletSpawn.transform.rotation);
-        if(this.fireRate < 10)
-        {
-            this.fireRate += .5f;
-        }
+        this.stopShooting();
     }
 }

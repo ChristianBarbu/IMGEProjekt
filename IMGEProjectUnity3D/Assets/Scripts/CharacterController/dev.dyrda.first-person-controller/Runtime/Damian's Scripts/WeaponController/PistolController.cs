@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using weapon;
 
-public class LMGController : WeaponController
+public class PistolController : WeaponController
 {
     public override void fireShots()
     {
