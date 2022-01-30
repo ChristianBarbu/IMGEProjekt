@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 
-namespace DyrdaDev.FirstPersonController
-{
+
     public static class RotationTools
     {
         public static Quaternion ClampRotationAroundXAxis(Quaternion q, float minAngle, float maxAngle)
@@ -19,6 +18,5 @@ namespace DyrdaDev.FirstPersonController
             euler.x = Mathf.Clamp(euler.x, minAngle, maxAngle);
 
             return Quaternion.Euler(euler);
-        }
+       }
     }
-}

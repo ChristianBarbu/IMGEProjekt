@@ -4,8 +4,7 @@ using UniRx;
 using UniRx.Triggers;
 using Random = UnityEngine.Random;
 
-namespace DyrdaDev.FirstPersonController
-{
+
     public static class SelectItemObservables
     {
         /// <summary>
@@ -75,4 +74,3 @@ namespace DyrdaDev.FirstPersonController
             });
         }
     }
-}

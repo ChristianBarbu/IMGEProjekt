@@ -2,8 +2,6 @@
 using UniRx;
 using UnityEngine;
 
-namespace DyrdaDev.FirstPersonController
-{
     public abstract class FirstPersonControllerInput : MonoBehaviour
     {
         /// <summary>
@@ -41,4 +39,3 @@ namespace DyrdaDev.FirstPersonController
     }
 
 
-}

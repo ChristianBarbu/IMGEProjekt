@@ -1,8 +1,7 @@
 ﻿using UniRx;
 using UnityEngine;
 
-namespace DyrdaDev.FirstPersonController
-{
+
     public class HeadBob : MonoBehaviour
     {
         [Header("References")]
@@ -47,4 +46,3 @@ namespace DyrdaDev.FirstPersonController
             }).AddTo(this);
         }
     }
-}

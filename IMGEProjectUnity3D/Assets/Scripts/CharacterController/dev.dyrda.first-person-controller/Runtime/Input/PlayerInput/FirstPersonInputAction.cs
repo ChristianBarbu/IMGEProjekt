@@ -15,8 +15,7 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
-namespace DyrdaDev.FirstPersonController
-{
+
     public partial class @FirstPersonInputAction : IInputActionCollection2, IDisposable
     {
         public InputActionAsset asset { get; }
@@ -650,4 +649,4 @@ namespace DyrdaDev.FirstPersonController
             void OnCrouch(InputAction.CallbackContext context);
         }
     }
-}
+

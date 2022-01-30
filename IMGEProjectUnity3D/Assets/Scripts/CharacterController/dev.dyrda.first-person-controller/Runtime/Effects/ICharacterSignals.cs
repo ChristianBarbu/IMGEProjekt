@@ -2,8 +2,7 @@
 using UniRx;
 using UnityEngine;
 
-namespace DyrdaDev.FirstPersonController
-{
+
     public interface ICharacterSignals
     {
         /// <summary>
@@ -40,4 +39,3 @@ namespace DyrdaDev.FirstPersonController
         /// </summary>
         IObservable<Unit> Stepped { get; }
     }
-}

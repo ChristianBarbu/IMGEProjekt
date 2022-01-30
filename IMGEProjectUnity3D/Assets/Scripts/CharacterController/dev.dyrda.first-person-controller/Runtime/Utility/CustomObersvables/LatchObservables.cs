@@ -4,8 +4,7 @@ using UniRx;
 using UniRx.Triggers;
 using Random = UnityEngine.Random;
 
-namespace DyrdaDev.FirstPersonController
-{
+
     public static class LatchObservables
     {
         public static IObservable<bool> Latch(IObservable<Unit> tick, IObservable<Unit> latchTrue, bool initialValue)
@@ -37,4 +36,3 @@ namespace DyrdaDev.FirstPersonController
             });
         }
     }
-}

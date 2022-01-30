@@ -3,8 +3,7 @@ using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
 
-namespace DyrdaDev.FirstPersonController
-{
+
     public class InputActionBasedFirstPersonControllerInput : FirstPersonControllerInput
     {
         #region Controller Input Fields
@@ -111,4 +110,3 @@ namespace DyrdaDev.FirstPersonController
                 });
         }
     }
-}
