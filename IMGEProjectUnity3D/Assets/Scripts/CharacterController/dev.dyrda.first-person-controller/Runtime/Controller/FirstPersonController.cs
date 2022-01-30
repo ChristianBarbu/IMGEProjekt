@@ -2,6 +2,8 @@
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
+using weapon;
+
 
 namespace DyrdaDev.FirstPersonController
 {
@@ -71,6 +73,8 @@ namespace DyrdaDev.FirstPersonController
         [Range(0, 90)] [SerializeField] private float maxViewAngle = 60f;
 
         #endregion
+
+        public GameObject weapon;
 
         private void Awake()
         {
@@ -233,7 +237,13 @@ namespace DyrdaDev.FirstPersonController
 
             {
                 if (input)
-                    Debug.Log("Shoot");
+                {
+                    this.weapon.GetComponent<>().startShooting();
+                } else
+                {
+                    this.weapon.GetComponent<WeaponController>().stopShooting();
+                }
+                    
             }
             ).AddTo(this);
 

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using weapon;
 
 public class ShotgunController : WeaponController
 {
@@ -12,6 +13,6 @@ public class ShotgunController : WeaponController
             bullet.transform.Rotate(new Vector3(Random.Range(-15.0f, 15.0f), Random.Range(-15.0f, 15.0f), 0));
         }
 
-        //this.stopShooting();
+        this.stopShooting();
     }
 }
