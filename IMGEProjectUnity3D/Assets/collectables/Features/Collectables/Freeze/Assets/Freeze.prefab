@@ -116,6 +116,7 @@ MonoBehaviour:
   minSpawnDistance: 200
   maxSpawnDistance: 700
   canSpawnInAir: 0
+  verticalSpawnOffset: 0.5
   conditions: []
 --- !u!1001 &7084775314942586534
 PrefabInstance:

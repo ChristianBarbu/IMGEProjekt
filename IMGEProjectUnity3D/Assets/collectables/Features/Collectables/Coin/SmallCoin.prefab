@@ -143,4 +143,5 @@ MonoBehaviour:
   minSpawnDistance: 50
   maxSpawnDistance: 400
   canSpawnInAir: 0
+  verticalSpawnOffset: 0.25
   conditions: []

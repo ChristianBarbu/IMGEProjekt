@@ -366,7 +366,7 @@ GameObject:
   - component: {fileID: 6267509100899549861}
   - component: {fileID: 7064844882060397419}
   - component: {fileID: 4024493538922333113}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: CollectableSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -430,6 +430,7 @@ MonoBehaviour:
   - {fileID: 4190284202195562374, guid: 9202c131f37dbb349a95a91f2c767940, type: 3}
   - {fileID: 7084775315890057591, guid: 52762ff6ce95c734291b9194c4a93f84, type: 3}
   - {fileID: 8735334792600208234, guid: a4fe7f3df7378fd4297e7eb58e24bac8, type: 3}
+  - {fileID: 9015672993545991581, guid: e0ba681fb4117494cafe4581c0fcb1ee, type: 3}
 --- !u!1 &8695952344590583468
 GameObject:
   m_ObjectHideFlags: 0

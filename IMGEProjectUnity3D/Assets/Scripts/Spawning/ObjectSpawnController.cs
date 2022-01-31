@@ -185,7 +185,7 @@ public class ObjectSpawnController : MonoBehaviour
 
     void SpawnObject(GameObject  obj, Vector3 position)
     {
-        spawnedObject = Instantiate(obj, position, new Quaternion());
+        spawnedObject = Instantiate(obj, position + Vector3.up * objectData[obj].verticalSpawnOffset, new Quaternion());
     }
 
     protected virtual Vector3 CalculateSpawnPosition(GameObject obj)
