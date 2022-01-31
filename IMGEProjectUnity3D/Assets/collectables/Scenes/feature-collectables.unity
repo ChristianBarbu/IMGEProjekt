@@ -467,7 +467,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyBall (2)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4764430477395839572, guid: 0f344d03becefac46af60238fa209523, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 0f344d03becefac46af60238fa209523, type: 3}
 --- !u!1 &147006902
 GameObject:
@@ -2207,17 +2208,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9202c131f37dbb349a95a91f2c767940, type: 3}
---- !u!114 &1681357609 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4764430477395839572, guid: 0f344d03becefac46af60238fa209523, type: 3}
-  m_PrefabInstance: {fileID: 139016985}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d69d13f310ef8244197f545c601eae18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1716396263
 GameObject:
   m_ObjectHideFlags: 0
@@ -2726,7 +2716,7 @@ PrefabInstance:
     - target: {fileID: 7084775315890057589, guid: 52762ff6ce95c734291b9194c4a93f84, type: 3}
       propertyPath: _enemies.Array.data[0]
       value: 
-      objectReference: {fileID: 1681357609}
+      objectReference: {fileID: 0}
     - target: {fileID: 7084775315890057591, guid: 52762ff6ce95c734291b9194c4a93f84, type: 3}
       propertyPath: m_Name
       value: Freeze

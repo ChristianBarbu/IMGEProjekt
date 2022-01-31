@@ -133,7 +133,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sensor: {fileID: 9015672993545991575}
-  weaponCount: 4
+  weaponCount: 6
 --- !u!114 &9015672993545991575
 MonoBehaviour:
   m_ObjectHideFlags: 0

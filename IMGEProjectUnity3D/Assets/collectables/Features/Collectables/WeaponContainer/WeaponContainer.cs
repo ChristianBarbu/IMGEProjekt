@@ -8,9 +8,12 @@ public class WeaponContainer : MonoBehaviour
 {
     public Sensor sensor;
     public int weaponCount;
-
+    private FirstPersonController firstPersonController;
+    
     private void Start()
     {
+        
+        firstPersonController = GameObject.FindGameObjectWithTag("Player").GetComponent<FirstPersonController>();
         sensor.SensorTriggered.Subscribe(CollectSignalDetected).AddTo(this);
     }
 
@@ -19,7 +22,9 @@ public class WeaponContainer : MonoBehaviour
         if (weaponCount <= 1) return;
         var random = new Random();
         var pickedWeaponId = random.Next(weaponCount);
-
+        
+        firstPersonController.ChangeWeapon(pickedWeaponId);   
+        
         Debug.Log("You have picked the weapon with the id: " + pickedWeaponId);
     }
 
