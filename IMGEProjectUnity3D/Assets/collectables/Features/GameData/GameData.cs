@@ -94,8 +94,9 @@ public class GameData : SingletonMonoBehaviour<GameData>
         if (Health <= 0)
         {
             SceneManager.LoadScene("GameOver");
+            Health = 1f;
         }
-        Health = 0.5f;
+
     }
 
     public void DecreaseShield(float value)
