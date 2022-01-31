@@ -13,6 +13,7 @@ public class ChargingObjective: MonoBehaviour
     public float leavingPenalty = 10;
     public float chargingGoal = 100;
     public Reward reward;
+    public CompassBarElement compassBarElement;
 
     public ReactiveProperty<bool> IsCharging { get; private set; }
 
@@ -46,6 +47,8 @@ public class ChargingObjective: MonoBehaviour
             reward.GiveReward(receiver);
             Destroy(gameObject);
         }).AddTo(this);
+        var m = Instantiate(compassBarElement);
+        m.target = gameObject.transform;
     }
 
     

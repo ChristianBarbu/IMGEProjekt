@@ -117,4 +117,6 @@ public class GameData : SingletonMonoBehaviour<GameData>
     {
         Shield = 1;
     }
+
+    public ReactiveCollection<CompassBarElement> CompassBarElements { get; private set; } = new ReactiveCollection<CompassBarElement>();
 }

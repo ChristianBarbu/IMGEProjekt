@@ -72,6 +72,7 @@ MonoBehaviour:
   leavingPenalty: 10
   chargingGoal: 100
   reward: {fileID: 7309296962050911847}
+  compassBarElement: {fileID: 5271897230261508709, guid: 653a6e6a846b88f4497a8f6b2bde1a50, type: 3}
 --- !u!114 &7309296962050911847
 MonoBehaviour:
   m_ObjectHideFlags: 0
