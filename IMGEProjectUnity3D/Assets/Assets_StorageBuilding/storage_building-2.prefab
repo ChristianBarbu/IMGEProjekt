@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3126942247328152831}
   m_Layer: 0
   m_Name: storage_building-2
-  m_TagString: Untagged
+  m_TagString: Climb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 40
