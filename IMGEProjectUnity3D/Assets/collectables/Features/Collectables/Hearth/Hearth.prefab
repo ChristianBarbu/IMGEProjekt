@@ -145,6 +145,7 @@ MonoBehaviour:
   minSpawnDistance: 300
   maxSpawnDistance: 800
   canSpawnInAir: 0
+  verticalSpawnOffset: 0.25
   conditions: []
 --- !u!54 &7324790721153606535
 Rigidbody:

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 65000013797062558}
   m_Layer: 0
   m_Name: Hangar_v6_3
-  m_TagString: Untagged
+  m_TagString: Climb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 40

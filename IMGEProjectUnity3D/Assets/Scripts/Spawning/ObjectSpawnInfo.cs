@@ -18,5 +18,7 @@ public class ObjectSpawnInfo : MonoBehaviour
 
     public bool canSpawnInAir;
 
+    public float verticalSpawnOffset = 0;
+
     public List<ObjectSpawnCondition> conditions = new List<ObjectSpawnCondition>();
 }
