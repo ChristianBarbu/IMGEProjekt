@@ -24,6 +24,8 @@ public class ChargingObjective: MonoBehaviour
     public IObservable<bool> Completed { get; protected set; }
     protected GameObject receiver;
 
+    private CompassBarElement marker;
+
     private void Awake()
     {
         IsCharging = new ReactiveProperty<bool>(false);
@@ -45,10 +47,11 @@ public class ChargingObjective: MonoBehaviour
         Completed.Where(c=>c).Subscribe(_ =>
         {
             reward.GiveReward(receiver);
+            marker.Remove();
             Destroy(gameObject);
         }).AddTo(this);
-        var m = Instantiate(compassBarElement);
-        m.target = gameObject.transform;
+        marker = Instantiate(compassBarElement);
+        marker.target = gameObject.transform;
     }
 
     

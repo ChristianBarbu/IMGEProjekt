@@ -47,4 +47,8 @@ public class CompassBarElement : MonoBehaviour
             _rectTransform.anchoredPosition = new Vector2(xPosition, 0);
         }
     }
+    public void Remove()
+    {
+        GameData.Instance.CompassBarElements.Remove(this);
+    }
 }
