@@ -31,7 +31,8 @@ public class WeaponContainer : MonoBehaviour
     void CollectSignalDetected(EventArgs args)
     {
         Collect();
-        gameObject.SetActive(false);
+        Destroy(gameObject);
+        // gameObject.SetActive(false);
     }
 
 }
