@@ -1,6 +1,7 @@
 using System;
 using UniRx;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameData : SingletonMonoBehaviour<GameData>
 {
@@ -10,7 +11,7 @@ public class GameData : SingletonMonoBehaviour<GameData>
         CollectableCunt = 0;
         _difficultyScaling.Value = 1;
     }
-    
+
     private ReactiveProperty<float> _difficultyScaling = new ReactiveProperty<float>();
     public ReactiveProperty<float> DifficultyScaling
     {
@@ -20,16 +21,16 @@ public class GameData : SingletonMonoBehaviour<GameData>
 
     public int EnemyCount
     {
-        get;set;
+        get; set;
     }
 
     public int CollectableCunt
     {
-        get;set;
+        get; set;
     }
 
     public ReactiveProperty<int> score = new ReactiveProperty<int>(0);
-    
+
     public ReactiveProperty<float> health = new ReactiveProperty<float>(5);
 
     public ReactiveProperty<float> shield = new ReactiveProperty<float>(0);
@@ -90,6 +91,11 @@ public class GameData : SingletonMonoBehaviour<GameData>
     {
         if (Health > 0)
             Health = Mathf.Clamp(Health - value, 0, 1);
+        if (Health <= 0)
+        {
+            SceneManager.LoadScene("GameOver");
+        }
+        Health = 0.5f;
     }
 
     public void DecreaseShield(float value)
@@ -97,7 +103,7 @@ public class GameData : SingletonMonoBehaviour<GameData>
         if (Shield >= 0)
             Shield = Mathf.Clamp(Shield - value, 0, 1);
     }
-    
+
     public void IncreaseShield(float value)
     {
         Shield = Mathf.Clamp(Shield + value, 0, 1);

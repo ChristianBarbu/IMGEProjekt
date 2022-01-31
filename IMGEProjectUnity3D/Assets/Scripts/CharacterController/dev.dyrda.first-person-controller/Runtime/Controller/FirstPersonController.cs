@@ -391,7 +391,7 @@ public class FirstPersonController : MonoBehaviour, ICharacterSignals
                 var newQ = _camera.transform.localRotation * Quaternion.Euler(verticalLook * 100);
 
                 _camera.transform.localRotation =
-                    RotationTools.ClampRotationAroundXAxis(newQ, -maxViewAngle, -minViewAngle);
+                       RotationTools.ClampRotationAroundXAxis(newQ, -maxViewAngle, -minViewAngle);
 
             }).AddTo(this);
     }
