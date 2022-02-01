@@ -28,7 +28,7 @@ public class DeathZone : MonoBehaviour
         }
     }
     private void OnTriggerExit(Collider other)
-    {
+  {
         if(other.tag == "Player")
         {
             playerInside = false;
