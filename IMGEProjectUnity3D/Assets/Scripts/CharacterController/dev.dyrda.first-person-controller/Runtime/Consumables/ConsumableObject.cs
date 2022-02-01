@@ -7,7 +7,7 @@ public enum ConsumableTypes{Rockets,Shield,Speedbooster,Scorebooster,TimeLapse,J
 public class ConsumableObject : MonoBehaviour
 {
     public ConsumableTypes type;
-    [SerializeField] private int secondsForTimer;
+    [SerializeField] private GameObject consumable;
     
 
     public void OnTriggerEnter(Collider player)
@@ -15,6 +15,7 @@ public class ConsumableObject : MonoBehaviour
         if (player.GetComponent<FirstPersonController>() != null)
         {
             player.gameObject.GetComponent<FirstPersonController>().consumable = this;
+            Destroy(consumable);
         }
     }
     
