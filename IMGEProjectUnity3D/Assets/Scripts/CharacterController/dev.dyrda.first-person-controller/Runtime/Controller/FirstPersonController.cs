@@ -384,11 +384,11 @@ public class FirstPersonController : MonoBehaviour, ICharacterSignals
 
                 // Horizontal look with rotation around the vertical axis, where + means clockwise.
                 var horizontalLook = inputLook.x * Vector3.up * Time.deltaTime;
-                transform.localRotation *= Quaternion.Euler(horizontalLook * 100);
+                transform.localRotation *= Quaternion.Euler(horizontalLook * 25);
 
                 // Vertical look with rotation around the horizontal axis, where + means upwards.
                 var verticalLook = inputLook.y * Vector3.left * Time.deltaTime;
-                var newQ = _camera.transform.localRotation * Quaternion.Euler(verticalLook * 100);
+                var newQ = _camera.transform.localRotation * Quaternion.Euler(verticalLook * 25);
 
                 _camera.transform.localRotation =
                        RotationTools.ClampRotationAroundXAxis(newQ, -maxViewAngle, -minViewAngle);
