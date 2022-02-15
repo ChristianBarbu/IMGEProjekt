@@ -15,24 +15,19 @@ public class ChargingObjective: Objective
 
     public ReactiveProperty<bool> IsCharging { get; private set; }
 
-    //public ReactiveProperty<float> Charge { get; private set; }
-
-    //public IObservable<bool> Completed { get; protected set; }
     protected GameObject receiver;
 
 
 
-    private void Awake()
+    public override void Awake()
     {
-        progressGoal = 100;
-
-        IsCharging = new ReactiveProperty<bool>(false);
-        progress = new ReactiveProperty<float>();
-        completed = new ReactiveProperty<bool>(false);
+        base.Awake();
+        IsCharging = new ReactiveProperty<bool>();
     }
     // Start is called before the first frame update
-    void Start()
+    public override void Start()
     {
+        base.Start();
 
         this.UpdateAsObservable().Subscribe(_ =>
         {
@@ -47,8 +42,9 @@ public class ChargingObjective: Objective
             marker.Remove();
             Destroy(gameObject);
         }).AddTo(this);
-        marker = Instantiate(marker);
-        marker.target = gameObject.transform;
+        // -> base?
+        //marker = Instantiate(marker);
+        //marker.target = gameObject.transform;
     }
 
     
