@@ -34,6 +34,7 @@ public class BasicBulletScript : MonoBehaviour
         //insert damage functionality
         Pew = Instantiate(Pew, this.gameObject.transform.position, this.gameObject.transform.rotation);
         Pew.transform.forward = this.transform.forward * (-1);
+        Debug.Log("the mysterios object is: " + other.name);
         Death();
     }
 

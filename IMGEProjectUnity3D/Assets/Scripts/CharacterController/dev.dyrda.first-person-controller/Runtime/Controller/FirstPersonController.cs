@@ -97,7 +97,7 @@ public class FirstPersonController : MonoBehaviour, ICharacterSignals
         _stepped = new Subject<Unit>().AddTo(this);
         crouched = false;
 
-        currentWeapon = Weapons[0];
+        currentWeapon = Weapons[5];
         currentWeapon.SetActive(true);
     }
 
@@ -108,6 +108,20 @@ public class FirstPersonController : MonoBehaviour, ICharacterSignals
         HandleSteppedCharacterSignal();
 
         HandleLook();
+    }
+
+    private void Update()
+    {   
+        RaycastHit hit; 
+        if (Physics.Raycast(this._camera.transform.position, this._camera.transform.forward, out hit, float.PositiveInfinity, ~10, QueryTriggerInteraction.Ignore))
+        {
+            this.currentWeapon.GetComponent<WeaponController>().bulletSpawn.transform.LookAt(hit.point);
+        }
+        else
+        {
+            this.currentWeapon.GetComponent<WeaponController>().bulletSpawn.transform.rotation = this.currentWeapon.transform.rotation;
+        }
+        //used to make the shooting cleaner
     }
 
     public void ChangeWeapon(int weaponId)
@@ -411,13 +425,4 @@ public class FirstPersonController : MonoBehaviour, ICharacterSignals
 
 
     }
-
-    private void Update()
-    {
-        RaycastHit hit;
-        Physics.Raycast(this._camera.transform.position, this._camera.transform.forward, out hit, float.PositiveInfinity, ~10, QueryTriggerInteraction.Ignore);
-
-        this.currentWeapon.GetComponent<WeaponController>().bulletSpawn.transform.LookAt(hit.point);
-    }
-
 }
