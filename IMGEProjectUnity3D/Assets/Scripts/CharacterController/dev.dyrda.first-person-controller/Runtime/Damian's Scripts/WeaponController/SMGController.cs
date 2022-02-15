@@ -4,9 +4,30 @@ using UnityEngine;
 
 public class SMGController : WeaponController
 {
+    public GameObject BulletVFX;
+
     public override void fireShots()
     {
         GameObject bullet = Instantiate(this.bullet, bulletSpawn.transform.position, bulletSpawn.transform.rotation); 
         bullet.transform.Rotate(new Vector3(Random.Range(-2.0f, 2.0f), Random.Range(-2.0f, 2.0f), 0));
+    }
+
+    protected override void FixedUpdate()
+    {
+        if (Time.time > timeBetweenShots)
+        {
+            if (this.shouldShoot)
+            {
+                timeBetweenShots = Time.time + (1 / fireRate);
+                fireShots();
+                BulletVFX.SetActive(true);
+            } 
+            else
+            {
+                BulletVFX.SetActive(false);
+            }
+           
+        }
+
     }
 }

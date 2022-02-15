@@ -97,7 +97,8 @@ public class FirstPersonController : MonoBehaviour, ICharacterSignals
         _stepped = new Subject<Unit>().AddTo(this);
         crouched = false;
 
-        currentWeapon = Weapons[5];
+        currentWeapon = Weapons[0];
+        currentWeapon.SetActive(true);
     }
 
     private void Start()
@@ -409,6 +410,14 @@ public class FirstPersonController : MonoBehaviour, ICharacterSignals
         }
 
 
+    }
+
+    private void Update()
+    {
+        RaycastHit hit;
+        Physics.Raycast(this._camera.transform.position, this._camera.transform.forward, out hit, float.PositiveInfinity, ~10, QueryTriggerInteraction.Ignore);
+
+        this.currentWeapon.GetComponent<WeaponController>().bulletSpawn.transform.LookAt(hit.point);
     }
 
 }

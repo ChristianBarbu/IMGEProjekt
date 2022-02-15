@@ -11,9 +11,8 @@ public abstract class WeaponController : MonoBehaviour
 
     public float fireRate;
 
-    private float timeBetweenShots = 0;
-
-    private bool shouldShoot = false;
+    protected float timeBetweenShots = 0;
+    protected bool shouldShoot = false;
 
     public void startShooting()
     {
@@ -26,7 +25,7 @@ public abstract class WeaponController : MonoBehaviour
 
     public abstract void fireShots();
 
-    private void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
         if(this.shouldShoot && Time.time > timeBetweenShots)
         {
