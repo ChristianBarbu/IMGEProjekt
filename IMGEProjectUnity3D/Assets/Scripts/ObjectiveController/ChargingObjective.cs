@@ -5,33 +5,30 @@ using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
 
-public class ChargingObjective: MonoBehaviour
+public class ChargingObjective: Objective
 {
 
     public float chargingRate = 1;
     public float dechargingRate = 1;
     public float leavingPenalty = 10;
-    public float chargingGoal = 100;
     public Reward reward;
-    public CompassBarElement compassBarElement;
 
     public ReactiveProperty<bool> IsCharging { get; private set; }
 
-    public ReactiveProperty<float> Charge { get; private set; }
+    //public ReactiveProperty<float> Charge { get; private set; }
 
-
-
-    public IObservable<bool> Completed { get; protected set; }
+    //public IObservable<bool> Completed { get; protected set; }
     protected GameObject receiver;
 
-    private CompassBarElement marker;
+
 
     private void Awake()
     {
-        IsCharging = new ReactiveProperty<bool>(false);
-        Charge = new ReactiveProperty<float>();
-        Completed = Charge.Select(c => c>=chargingGoal);
+        progressGoal = 100;
 
+        IsCharging = new ReactiveProperty<bool>(false);
+        progress = new ReactiveProperty<float>();
+        completed = new ReactiveProperty<bool>(false);
     }
     // Start is called before the first frame update
     void Start()
@@ -40,17 +37,17 @@ public class ChargingObjective: MonoBehaviour
         this.UpdateAsObservable().Subscribe(_ =>
         {
             if (IsCharging.Value)
-                Charge.Value = Math.Min(chargingGoal,Charge.Value + chargingRate * Time.deltaTime);
+                progress.Value = Math.Min(progressGoal,progress.Value + chargingRate * Time.deltaTime);
             else
-                Charge.Value = Math.Max(0, Charge.Value - dechargingRate * Time.deltaTime);
+                progress.Value = Math.Max(0, progress.Value - dechargingRate * Time.deltaTime);
         }).AddTo(this);
-        Completed.Where(c=>c).Subscribe(_ =>
+        completed.Where(c=>c).Subscribe(_ =>
         {
             reward.GiveReward(receiver);
             marker.Remove();
             Destroy(gameObject);
         }).AddTo(this);
-        marker = Instantiate(compassBarElement);
+        marker = Instantiate(marker);
         marker.target = gameObject.transform;
     }
 
@@ -67,8 +64,12 @@ public class ChargingObjective: MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            Charge.Value = Math.Min(0, Charge.Value - 10);
+            progress.Value = Math.Min(0, progress.Value - 10);
             IsCharging.Value = false;
         }
+    }
+    public override void Reward()
+    {
+        
     }
 }

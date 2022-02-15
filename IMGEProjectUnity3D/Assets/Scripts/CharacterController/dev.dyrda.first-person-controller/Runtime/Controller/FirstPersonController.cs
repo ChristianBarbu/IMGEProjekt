@@ -79,9 +79,9 @@ public class FirstPersonController : MonoBehaviour, ICharacterSignals
 
     #endregion
 
-    private GameObject currentWeapon;
+    private WeaponController currentWeapon;
 
-    public GameObject[] Weapons = new GameObject[6];
+    public WeaponController[] Weapons = new WeaponController[6];
 
     public ConsumableObject consumable;
 
@@ -98,7 +98,7 @@ public class FirstPersonController : MonoBehaviour, ICharacterSignals
         crouched = false;
 
         currentWeapon = Weapons[5];
-        currentWeapon.SetActive(true);
+        currentWeapon.gameObject.SetActive(true);
     }
 
     private void Start()
@@ -115,11 +115,11 @@ public class FirstPersonController : MonoBehaviour, ICharacterSignals
         RaycastHit hit; 
         if (Physics.Raycast(this._camera.transform.position, this._camera.transform.forward, out hit, float.PositiveInfinity, ~10, QueryTriggerInteraction.Ignore))
         {
-            this.currentWeapon.GetComponent<WeaponController>().bulletSpawn.transform.LookAt(hit.point);
+            this.currentWeapon.bulletSpawn.transform.LookAt(hit.point);
         }
         else
         {
-            this.currentWeapon.GetComponent<WeaponController>().bulletSpawn.transform.rotation = this.currentWeapon.transform.rotation;
+            this.currentWeapon.bulletSpawn.transform.rotation = this.currentWeapon.transform.rotation;
         }
         //used to make the shooting cleaner
     }
@@ -283,11 +283,11 @@ public class FirstPersonController : MonoBehaviour, ICharacterSignals
         {
             if (input)
             {
-                this.currentWeapon.GetComponent<WeaponController>().startShooting();
+                this.currentWeapon.startShooting();
             }
             else
             {
-                this.currentWeapon.GetComponent<WeaponController>().stopShooting();
+                this.currentWeapon.stopShooting();
             }
 
         }
