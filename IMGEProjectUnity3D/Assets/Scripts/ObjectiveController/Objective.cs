@@ -19,7 +19,13 @@ public abstract class Objective : MonoBehaviour
     public virtual void Awake()
     {
         progress = new ReactiveProperty<float>();
-        completed = progress.Where(p => p >= progressGoal).Select(_=>true).ToReactiveProperty();
+        completed = progress.Select(p =>
+        {
+            if (p >= progressGoal)
+                return true;
+            else 
+                return false;
+        }).ToReactiveProperty();
     }
     public virtual void Start()
     {
