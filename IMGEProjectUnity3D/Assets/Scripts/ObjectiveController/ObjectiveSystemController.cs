@@ -17,7 +17,7 @@ public class ObjectiveSystemController : MonoBehaviour
 
     public void Start()
     {
-        currentObjective = Objectives[UnityEngine.Random.Range(0, Objectives.Length + 1)];
+        currentObjective = Objectives[UnityEngine.Random.Range(0, Objectives.Length)];
 
 
 

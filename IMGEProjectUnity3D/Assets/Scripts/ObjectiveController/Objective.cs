@@ -29,7 +29,9 @@ public abstract class Objective : MonoBehaviour
     }
     public virtual void Start()
     {
-      // marker ??
+        // marker ??
+        marker = Instantiate(marker);
+        marker.target = gameObject.transform;
     }
 
 

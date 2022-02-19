@@ -43,8 +43,6 @@ public class ChargingObjective: Objective
             Destroy(gameObject);
         }).AddTo(this);
         // -> base?
-        //marker = Instantiate(marker);
-        //marker.target = gameObject.transform;
     }
 
     
