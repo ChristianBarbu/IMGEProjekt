@@ -33,7 +33,7 @@ Transform:
   m_GameObject: {fileID: 4378162937005788218}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 4, y: 4, z: 4}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1579803169358472376}
@@ -408,6 +408,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PA_Warrior
       objectReference: {fileID: 0}
+    - target: {fileID: 72233689956696760, guid: 38244c67d026db1419ec861f398c5023, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 243d5e700bf24634c9c45434c8742744, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 38244c67d026db1419ec861f398c5023, type: 3}
 --- !u!4 &1579803169358472376 stripped

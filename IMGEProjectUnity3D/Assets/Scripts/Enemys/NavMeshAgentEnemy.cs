@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UniRx;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -12,6 +13,7 @@ public class NavMeshAgentEnemy : Enemy
     {
         base.Start();
         agent = GetComponent<NavMeshAgent>();
+        Health.Where(h=>h<=0).Subscribe(h => agent.enabled = false).AddTo(this);
     }
 
     public override float Speed
@@ -21,6 +23,10 @@ public class NavMeshAgentEnemy : Enemy
         {
             speed = value;
             agent.speed = value;
+            if (speed > 0)
+                animator?.SetBool("Moving", true);
+            else
+                animator?.SetBool("Moving", false);
         }
     }
 

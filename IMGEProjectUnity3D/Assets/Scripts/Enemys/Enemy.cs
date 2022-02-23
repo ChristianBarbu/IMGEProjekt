@@ -22,10 +22,19 @@ public class Enemy : MonoBehaviour
 
     protected float speed;
 
+    protected Animator animator;
+
     public virtual float Speed
     {
         get => speed;
-        set => speed = value;
+        set
+        {
+            speed = value;
+            if (speed > 0)
+                animator?.SetBool("Moving", true);
+            else
+                animator?.SetBool("Moving", false);
+        }
     }
 
     public EnemyAttack attack;
@@ -47,6 +56,7 @@ public class Enemy : MonoBehaviour
     public virtual void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        animator = gameObject.GetComponentInChildren<Animator>();
         sensor?.SensorTriggered?.Subscribe(HitSignalDetected)?.AddTo(this);
         CanAttackPlayer.Subscribe(b =>
         {
@@ -72,7 +82,8 @@ public class Enemy : MonoBehaviour
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(player.transform.position - transform.position), Time.deltaTime);
         }).AddTo(this);
 
-        Health.Where(h => h <= 0).Subscribe(_ => Destroy(gameObject)).AddTo(this);
+        Health.Where(h => h <= 0).Subscribe(_ => { animator?.SetBool("Dead", true); Destroy(gameObject,animator?.GetCurrentAnimatorStateInfo(0).length ?? 0);  }).AddTo(this);
+        animator?.SetBool("Moving", true);
 
     }
 
