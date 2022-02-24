@@ -29,15 +29,18 @@ public class CompassBarElement : MonoBehaviour
         if (Bar != null)
         {
             var u = -Bar.BarRectTransform.rect.width / 90;
-            float xPosition;
+            float xPosition = 0;
             if (!useFixDirection)
             {
-                Vector3 dir = (target.position - player.position).normalized;
-                Vector2 d = new Vector2(dir.x, dir.z);
-                float angle = Vector2.SignedAngle(new Vector2(player.forward.x, player.forward.z), d);
-                xPosition = u * angle;
-                //float xPosition = angle * (360 / bar.BarRange) * (bar.BarRectTransform.rect.width / 2);
-                _rectTransform.anchoredPosition = new Vector2(xPosition, 0);
+                if (target is not null)
+                {
+                    Vector3 dir = (target.position - player.position).normalized;
+                    Vector2 d = new Vector2(dir.x, dir.z);
+                    float angle = Vector2.SignedAngle(new Vector2(player.forward.x, player.forward.z), d);
+                    xPosition = u * angle;
+                    //float xPosition = angle * (360 / bar.BarRange) * (bar.BarRectTransform.rect.width / 2);
+                    _rectTransform.anchoredPosition = new Vector2(xPosition, 0);
+                }
             }
             else
             {

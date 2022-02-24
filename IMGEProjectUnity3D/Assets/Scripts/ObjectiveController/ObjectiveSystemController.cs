@@ -16,12 +16,13 @@ public class ObjectiveSystemController : MonoBehaviour
 
     private void Awake()
     {
-        createRandomObjective();
-        curObjCompleted = currentObjective.completed.ToReactiveProperty();
+        
     }
 
     private void Start()
     {
+        createRandomObjective();
+        curObjCompleted = currentObjective.completed.ToReactiveProperty();
         curObjCompleted.Where(completed => true).Subscribe(_ =>
         {
             Destroy(currentObjective);
@@ -32,8 +33,7 @@ public class ObjectiveSystemController : MonoBehaviour
 
     private void createRandomObjective()
     {
-        currentObjective = Objectives[UnityEngine.Random.Range(0, Objectives.Length)];
-        Instantiate(currentObjective);
+        currentObjective = spawner.SpawnObject(Objectives[UnityEngine.Random.Range(0, Objectives.Length)].gameObject).GetComponent<Objective>();
         marker.target = currentObjective.transform;
     }
 

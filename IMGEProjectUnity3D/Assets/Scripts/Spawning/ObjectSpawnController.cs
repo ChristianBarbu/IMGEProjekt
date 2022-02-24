@@ -147,13 +147,13 @@ public class ObjectSpawnController : MonoBehaviour
                 spawnCounter++;
                 // calculate hp/dmg
                 // set reward
-                var pos = CalculateSpawnPosition(selectedObject);
+                var pos = CalculateSpawnPosition(selectedObject,objectData[selectedObject]);
                 if (pos.x == float.NegativeInfinity)
                 {
                     yield return FailSpawn();
                     continue;
                 }
-                SpawnObject(selectedObject, pos);
+                SpawnObject(selectedObject, pos, objectData[selectedObject]);
                 yield return SuccessSpawn();
                 continue;
             }
@@ -183,14 +183,14 @@ public class ObjectSpawnController : MonoBehaviour
         return new WaitForSeconds(t);
     }
 
-    void SpawnObject(GameObject  obj, Vector3 position)
+    void SpawnObject(GameObject  obj, Vector3 position, ObjectSpawnInfo data)
     {
-        spawnedObject = Instantiate(obj, position + Vector3.up * objectData[obj].verticalSpawnOffset, new Quaternion());
+        spawnedObject = Instantiate(obj, position + Vector3.up * data.verticalSpawnOffset, new Quaternion());
     }
 
-    protected virtual Vector3 CalculateSpawnPosition(GameObject obj)
+    protected virtual Vector3 CalculateSpawnPosition(GameObject obj, ObjectSpawnInfo info)
     {
-        var data = objectData[obj];
+        var data = info;
         UnityEngine.Random.Range(data.minSpawnDistance, data.maxSpawnDistance);
         var max = Physics.OverlapSphere(player.transform.position, data.maxSpawnDistance, (1 << gameObject.layer)).Intersect(spawnAreas);
         var min = Physics.OverlapSphere(player.transform.position, data.minSpawnDistance, (1 << gameObject.layer)).Intersect(spawnAreas);
@@ -304,5 +304,16 @@ public class ObjectSpawnController : MonoBehaviour
     float GetSpawnInactiveTime()
     {
         return UnityEngine.Random.RandomRange(minTimeBetweenSpawns, maxTimeBetweenSpawns);
+    }
+
+
+    public GameObject SpawnObject(GameObject o)
+    {
+        ObjectSpawnInfo data = o.GetComponentInChildren<ObjectSpawnInfo>();
+        if (data == null)
+            data = o.GetComponent<EnemySpawnCapsule>()?.enemy?.GetComponent<ObjectSpawnInfo>();
+        var p = CalculateSpawnPosition(o,data);
+        SpawnObject(o, p,data);
+        return spawnedObject;
     }
 }

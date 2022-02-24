@@ -9,4 +9,5 @@ public class SingleObjectiveSpawnController : ObjectSpawnController
     {
         return spawnedObject != null;
     }
+
 }
