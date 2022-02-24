@@ -82,7 +82,11 @@ public class Enemy : MonoBehaviour
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(player.transform.position - transform.position), Time.deltaTime);
         }).AddTo(this);
 
-        Health.Where(h => h <= 0).Subscribe(_ => { animator?.SetBool("Dead", true); Destroy(gameObject,animator?.GetCurrentAnimatorStateInfo(0).length ?? 0);  }).AddTo(this);
+        Health.Where(h => h <= 0).Subscribe(_ =>
+        {
+            animator?.SetBool("Dead", true);
+            Destroy(gameObject,animator?.GetCurrentAnimatorStateInfo(0).length ?? 0); 
+        }).AddTo(this);
         animator?.SetBool("Moving", true);
 
     }

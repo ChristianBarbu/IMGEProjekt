@@ -7,6 +7,16 @@ public class BasicBulletScript : MonoBehaviour
     public GameObject Pew;
     public float Dmg = 25;
 
+    protected int layermask;
+
+    private void Awake()
+    {
+        layermask = (1<<10);
+        layermask |= (1 << 5);
+        layermask |= (1 << 8);
+
+        layermask = ~layermask;
+    }
     private void Start()
     {
         Invoke(nameof(Death), 7.5f);
@@ -18,7 +28,7 @@ public class BasicBulletScript : MonoBehaviour
     {
         RaycastHit hit;
         
-        if (Physics.Raycast(this.transform.position, Vector3.forward, out hit, Time.deltaTime * 50 + 1, ~15, QueryTriggerInteraction.Ignore))
+        if (Physics.Raycast(this.transform.position, Vector3.forward, out hit, Time.deltaTime * 50 + 1, layermask, QueryTriggerInteraction.Ignore))
         { 
             this.transform.position = hit.point;
             OnHitEnter(hit.collider);

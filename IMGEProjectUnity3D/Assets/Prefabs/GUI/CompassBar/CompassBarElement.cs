@@ -28,7 +28,7 @@ public class CompassBarElement : MonoBehaviour
     {
         if (Bar != null)
         {
-            var u = Bar.BarRectTransform.rect.width / 360;
+            var u = -Bar.BarRectTransform.rect.width / 90;
             float xPosition;
             if (!useFixDirection)
             {
