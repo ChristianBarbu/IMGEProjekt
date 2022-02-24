@@ -113,7 +113,7 @@ public class FirstPersonController : MonoBehaviour, ICharacterSignals
     private void Update()
     {   
         RaycastHit hit; 
-        if (Physics.Raycast(this._camera.transform.position, this._camera.transform.forward, out hit, float.PositiveInfinity, ~10, QueryTriggerInteraction.Ignore) && hit.distance > 2)
+        if (Physics.Raycast(this._camera.transform.position, this._camera.transform.forward, out hit, float.PositiveInfinity, ~10, QueryTriggerInteraction.Ignore) && hit.distance > 5)
         {   
             this.currentWeapon.bulletSpawn.transform.LookAt(hit.point);
         }
