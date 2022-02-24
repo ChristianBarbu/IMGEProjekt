@@ -12,7 +12,7 @@ public abstract class Objective : MonoBehaviour
     public ReactiveProperty<float> progress {get; protected set;}
 
 
-    protected CompassBarElement marker;
+    public CompassBarElement marker;
 
     public abstract void Reward();
 
