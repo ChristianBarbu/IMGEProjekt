@@ -6,10 +6,12 @@ using System;
 public abstract class Objective : MonoBehaviour
 {
 
-    public int progressGoal;
+    public float progressGoal;
 
     public IReadOnlyReactiveProperty<bool> completed;
     public ReactiveProperty<float> progress {get; protected set;}
+
+    public String objectiveTask;
 
     public abstract void Reward();
 
