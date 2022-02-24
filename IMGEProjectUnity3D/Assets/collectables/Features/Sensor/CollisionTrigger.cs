@@ -9,7 +9,7 @@ public class CollisionTrigger : Sensor
 {
     private void Awake()
     {
-        Debug.Log("Awake!");
+        //Debug.Log("Awake!");
         SensorTriggered = gameObject.AddComponent<ObservableCollisionTrigger>()
             .OnCollisionEnterAsObservable()
             .Where(col => col.collider.tag.Equals("Player"))

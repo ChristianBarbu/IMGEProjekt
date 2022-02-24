@@ -96,8 +96,8 @@ public class Enemy : MonoBehaviour
         var currentHealth = Mathf.Clamp(GameData.Instance.Health, 0, 1);
         var currentShield = Mathf.Clamp(GameData.Instance.Shield, 0, 1);
 
-        Debug.Log("currentHealth = " + currentHealth);
-        Debug.Log("currentShield = " + currentShield);
+        //Debug.Log("currentHealth = " + currentHealth);
+        //Debug.Log("currentShield = " + currentShield);
 
         if (currentHealth >= 1 && currentShield > 0)
         {
