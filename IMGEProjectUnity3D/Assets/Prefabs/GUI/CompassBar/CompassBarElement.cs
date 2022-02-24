@@ -29,6 +29,7 @@ public class CompassBarElement : MonoBehaviour
         if (Bar != null)
         {
             var u = -Bar.BarRectTransform.rect.width / 90;
+            var max = Bar.BarRectTransform.rect.width / 2;
             float xPosition = 0;
             if (!useFixDirection)
             {
@@ -39,15 +40,16 @@ public class CompassBarElement : MonoBehaviour
                     float angle = Vector2.SignedAngle(new Vector2(player.forward.x, player.forward.z), d);
                     xPosition = u * angle;
                     //float xPosition = angle * (360 / bar.BarRange) * (bar.BarRectTransform.rect.width / 2);
-                    _rectTransform.anchoredPosition = new Vector2(xPosition, 0);
+                    _rectTransform.anchoredPosition = new Vector2(Mathf.Clamp(xPosition,-max+15,max-15), 0);
                 }
             }
             else
             {
                 float angle = Vector2.SignedAngle(new Vector2(player.forward.x, player.forward.z), new Vector2(fixDirection.x, fixDirection.z));
                 xPosition = u * angle;
+                _rectTransform.anchoredPosition = new Vector2(xPosition, 0);
             }
-            _rectTransform.anchoredPosition = new Vector2(xPosition, 0);
+         
         }
     }
     public void Remove()
