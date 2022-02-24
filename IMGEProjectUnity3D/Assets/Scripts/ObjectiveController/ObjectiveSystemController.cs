@@ -16,12 +16,6 @@ public class ObjectiveSystemController : MonoBehaviour
     public SingleObjectiveSpawnController spawner;
     private IReadOnlyReactiveProperty<bool> curObjCompleted {get; set;}
 
-
-    private void Awake()
-    {
-        
-    }
-
     private void Start()
     {
         createRandomObjective();
@@ -38,11 +32,13 @@ public class ObjectiveSystemController : MonoBehaviour
     {
         currentObjective = spawner.SpawnObject(Objectives[UnityEngine.Random.Range(0, Objectives.Length)].gameObject).GetComponent<Objective>();
         marker.target = currentObjective.transform;
+        float smoothingValue = (currentObjective.progressGoal / 100) * 7;
+        progressBar.slider.value = smoothingValue;
         progressBar.textObject.text = currentObjective.objectiveTask;
-        progressBar.slider.maxValue = currentObjective.progressGoal;
+        progressBar.slider.maxValue = currentObjective.progressGoal + smoothingValue;
         currentObjective.progress.Subscribe(value =>
         {
-            progressBar.slider.value = value;
+            progressBar.slider.value = value + smoothingValue;
         }).AddTo(this);
     }
 

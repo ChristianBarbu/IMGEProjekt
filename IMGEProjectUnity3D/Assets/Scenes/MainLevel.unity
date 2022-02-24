@@ -7550,6 +7550,10 @@ PrefabInstance:
       propertyPath: spawner
       value: 
       objectReference: {fileID: 890596724}
+    - target: {fileID: 8420008277687059069, guid: 6a219a970dffed742b2673e40eadd2c0, type: 3}
+      propertyPath: progressBar
+      value: 
+      objectReference: {fileID: 1256179046}
     - target: {fileID: 8420008277687059070, guid: 6a219a970dffed742b2673e40eadd2c0, type: 3}
       propertyPath: m_Name
       value: ObjectiveSystemManager
@@ -15435,7 +15439,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 0.06
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -16730,8 +16734,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -4, y: 50.7}
-  m_SizeDelta: {x: 100, y: 25}
+  m_AnchoredPosition: {x: 43.8, y: 50.7}
+  m_SizeDelta: {x: 200, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1183298197
 MonoBehaviour:
@@ -18004,7 +18008,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textObject: {fileID: 1183298197}
-  slider: {fileID: 1054267838}
+  slider: {fileID: 1054267840}
 --- !u!1001 &1258331929
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21585,6 +21589,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 596129501}
+    - target: {fileID: 2569682172745408036, guid: 79401eaee9d10ff418956ee7161bdcb0, type: 3}
+      propertyPath: startCredits
+      value: 1e+36
+      objectReference: {fileID: 0}
     - target: {fileID: 2569682172745408036, guid: 79401eaee9d10ff418956ee7161bdcb0, type: 3}
       propertyPath: objects.Array.size
       value: 0

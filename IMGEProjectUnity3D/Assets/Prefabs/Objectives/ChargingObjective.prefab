@@ -70,7 +70,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   progressGoal: 100
   objectiveTask: Charge the Area
-  chargingRate: 1
+  chargingRate: 20
   dechargingRate: 0
   leavingPenalty: 5
   reward: {fileID: 7309296962050911847}

@@ -31,8 +31,8 @@ public class ChargingObjective: Objective
         {
             if (IsCharging.Value)
                 progress.Value = Math.Min(progressGoal,progress.Value + chargingRate * Time.deltaTime);
-            else
-                progress.Value = Math.Max(0, progress.Value - dechargingRate * Time.deltaTime);
+            //else
+                //progress.Value = Math.Max(0, progress.Value - dechargingRate * Time.deltaTime);
         }).AddTo(this);
         completed.Where(c=>c).Subscribe(_ =>
         {
