@@ -18,7 +18,7 @@ public class BasicBulletScript : MonoBehaviour
     {
         RaycastHit hit;
         
-        if (Physics.Raycast(this.transform.position, Vector3.forward, out hit, Time.deltaTime * 50 + 1, ~10, QueryTriggerInteraction.Ignore))
+        if (Physics.Raycast(this.transform.position, Vector3.forward, out hit, Time.deltaTime * 50 + 1, ~15, QueryTriggerInteraction.Ignore))
         { 
             this.transform.position = hit.point;
             OnHitEnter(hit.collider);
@@ -31,6 +31,7 @@ public class BasicBulletScript : MonoBehaviour
 
     private void OnHitEnter(Collider other)
     {
+        Debug.Log(other.name);
         if(other.tag == "Enemy")
         {
             other.gameObject.GetComponent<Enemy>().Health.Value -= Dmg;
