@@ -7630,6 +7630,10 @@ PrefabInstance:
       propertyPath: marker
       value: 
       objectReference: {fileID: 1020895386}
+    - target: {fileID: 8420008277687059069, guid: 6a219a970dffed742b2673e40eadd2c0, type: 3}
+      propertyPath: spawner
+      value: 
+      objectReference: {fileID: 890596724}
     - target: {fileID: 8420008277687059070, guid: 6a219a970dffed742b2673e40eadd2c0, type: 3}
       propertyPath: m_Name
       value: ObjectiveSystemManager
@@ -12782,6 +12786,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fcbcdad4411dafb489c6994b483d02a6, type: 3}
+--- !u!114 &890596724 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2569682172745408036, guid: 79401eaee9d10ff418956ee7161bdcb0, type: 3}
+  m_PrefabInstance: {fileID: 1548343984}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ad1519af631ba94287a2ff3a82308ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &890687683 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4000012506713666, guid: 58d97d456aead63499ac7d5316541f78, type: 3}
@@ -21341,7 +21356,7 @@ PrefabInstance:
       objectReference: {fileID: 596129501}
     - target: {fileID: 2569682172745408036, guid: 79401eaee9d10ff418956ee7161bdcb0, type: 3}
       propertyPath: objects.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2569682172745408036, guid: 79401eaee9d10ff418956ee7161bdcb0, type: 3}
       propertyPath: objects.Array.data[0]
