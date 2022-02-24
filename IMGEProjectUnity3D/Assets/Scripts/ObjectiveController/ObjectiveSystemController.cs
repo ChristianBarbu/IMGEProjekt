@@ -23,7 +23,7 @@ public class ObjectiveSystemController : MonoBehaviour
     {
         createRandomObjective();
         curObjCompleted = currentObjective.completed.ToReactiveProperty();
-        curObjCompleted.Where(completed => true).Subscribe(_ =>
+        curObjCompleted.Where(completed => completed == true).Subscribe(_ =>
         {
             Destroy(currentObjective);
             createRandomObjective();
