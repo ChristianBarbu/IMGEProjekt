@@ -17,8 +17,6 @@ public class ChargingObjective: Objective
 
     protected GameObject receiver;
 
-
-
     public override void Awake()
     {
         base.Awake();
@@ -27,7 +25,7 @@ public class ChargingObjective: Objective
     // Start is called before the first frame update
     public override void Start()
     {
-        base.Start();
+        
 
         this.UpdateAsObservable().Subscribe(_ =>
         {
@@ -39,7 +37,6 @@ public class ChargingObjective: Objective
         completed.Where(c=>c).Subscribe(_ =>
         {
             reward.GiveReward(receiver);
-            marker.Remove();
             Destroy(gameObject);
         }).AddTo(this);
         // -> base?

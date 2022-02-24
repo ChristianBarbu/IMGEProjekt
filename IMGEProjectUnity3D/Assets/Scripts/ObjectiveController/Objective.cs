@@ -11,9 +11,6 @@ public abstract class Objective : MonoBehaviour
     public IReadOnlyReactiveProperty<bool> completed;
     public ReactiveProperty<float> progress {get; protected set;}
 
-
-    public CompassBarElement marker;
-
     public abstract void Reward();
 
     public virtual void Awake()
@@ -30,9 +27,7 @@ public abstract class Objective : MonoBehaviour
     public virtual void Start()
     {
         // marker ??
-        marker = Instantiate(marker);
-        marker.target = gameObject.transform;
+        //marker = Instantiate(marker);
+        //marker.target = gameObject.transform;
     }
-
-
 }

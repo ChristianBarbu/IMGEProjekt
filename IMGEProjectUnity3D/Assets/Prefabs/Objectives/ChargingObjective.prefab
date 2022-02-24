@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1735252188084608508}
   - component: {fileID: 385738881251158257}
   m_Layer: 0
-  m_Name: ChargingZone
+  m_Name: ChargingObjective
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -54,6 +54,7 @@ MonoBehaviour:
   minSpawnDistance: 400
   maxSpawnDistance: 3000
   canSpawnInAir: 0
+  verticalSpawnOffset: 0
   conditions: []
 --- !u!114 &6976242144620937643
 MonoBehaviour:
@@ -67,12 +68,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6d7eb2682f2b0543ae8d20481d137c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chargingRate: 10
-  dechargingRate: 5
-  leavingPenalty: 10
-  chargingGoal: 100
+  progressGoal: 100
+  chargingRate: 1
+  dechargingRate: 0
+  leavingPenalty: 5
   reward: {fileID: 7309296962050911847}
-  compassBarElement: {fileID: 5271897230261508709, guid: 653a6e6a846b88f4497a8f6b2bde1a50, type: 3}
 --- !u!114 &7309296962050911847
 MonoBehaviour:
   m_ObjectHideFlags: 0

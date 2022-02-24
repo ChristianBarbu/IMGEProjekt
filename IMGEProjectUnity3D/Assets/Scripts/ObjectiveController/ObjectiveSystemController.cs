@@ -8,20 +8,33 @@ public class ObjectiveSystemController : MonoBehaviour
 {
     public Objective[] Objectives;
     private Objective currentObjective;
-    //private ReactiveProperty<bool> curObjCompleted {get; set;}
+    public CompassBarElement marker;
+    private IReadOnlyReactiveProperty<bool> curObjCompleted {get; set;}
 
 
     private void Awake()
     {
+        createRandomObjective();
+        curObjCompleted = currentObjective.completed.ToReactiveProperty();
     }
 
-    public void Start()
+    private void Start()
+    {
+        curObjCompleted.Where(completed => true).Subscribe(_ =>
+        {
+            Destroy(currentObjective);
+            createRandomObjective();
+            curObjCompleted = currentObjective.completed.ToReactiveProperty();
+        }).AddTo(this);
+    }
+
+    private void createRandomObjective()
     {
         currentObjective = Objectives[UnityEngine.Random.Range(0, Objectives.Length)];
-
-
-
+        Instantiate(currentObjective);
+        marker.target = currentObjective.transform;
     }
+
 
 
 
