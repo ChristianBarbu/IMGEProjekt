@@ -60,6 +60,10 @@ public class ObjectSpawnController : MonoBehaviour
             return new KeyValuePair<GameObject, ObjectSpawnInfo>(e, data);
             }));
         combinedObjectWeight = objectData.Values.Sum(i => i.weight);
+
+        spawnAreas = new List<Collider>(GetComponentsInChildren<Collider>());
+        // In case you forget
+        spawnAreas.ForEach(s => s.isTrigger = true);
     }
 
     void Start()
@@ -68,9 +72,7 @@ public class ObjectSpawnController : MonoBehaviour
         creditGenerator.Credits
             .Subscribe(c => credits += c)
             .AddTo(this);
-        spawnAreas = new List<Collider>(GetComponentsInChildren<Collider>());
-        // In case you forget
-        spawnAreas.ForEach(s => s.isTrigger = true);
+   
 
         // start loop
         StartCoroutine(SpawnLoop());
