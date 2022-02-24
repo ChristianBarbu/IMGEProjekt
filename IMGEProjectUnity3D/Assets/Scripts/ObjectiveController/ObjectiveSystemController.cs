@@ -9,6 +9,8 @@ public class ObjectiveSystemController : MonoBehaviour
     public Objective[] Objectives;
     private Objective currentObjective;
     public CompassBarElement marker;
+
+    public SingleObjectiveSpawnController spawner;
     private IReadOnlyReactiveProperty<bool> curObjCompleted {get; set;}
 
 
