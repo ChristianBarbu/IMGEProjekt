@@ -31,7 +31,6 @@ public class BasicBulletScript : MonoBehaviour
 
     private void OnHitEnter(Collider other)
     {
-        Debug.Log(other.name);
         if(other.tag == "Enemy")
         {
             other.gameObject.GetComponent<Enemy>().Health.Value -= Dmg;
