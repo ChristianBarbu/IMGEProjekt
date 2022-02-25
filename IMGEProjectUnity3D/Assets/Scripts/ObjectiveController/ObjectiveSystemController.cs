@@ -14,18 +14,24 @@ public class ObjectiveSystemController : MonoBehaviour
     public ProgressBarController progressBar;
 
     public SingleObjectiveSpawnController spawner;
-    private IReadOnlyReactiveProperty<bool> curObjCompleted {get; set;}
+    private IReadOnlyReactiveProperty<bool> curObjCompleted { get; set; }
 
     private void Start()
     {
         createRandomObjective();
         curObjCompleted = currentObjective.completed.ToReactiveProperty();
+        SubscribeToNewObjective();
+    }
+
+    private void SubscribeToNewObjective()
+    {
         curObjCompleted.Where(completed => completed == true).Subscribe(_ =>
         {
             Destroy(currentObjective);
             createRandomObjective();
             curObjCompleted = currentObjective.completed.ToReactiveProperty();
-        }).AddTo(this);
+            SubscribeToNewObjective();
+        }).AddTo(currentObjective);
     }
 
     private void createRandomObjective()
@@ -33,13 +39,17 @@ public class ObjectiveSystemController : MonoBehaviour
         currentObjective = spawner.SpawnObject(Objectives[UnityEngine.Random.Range(0, Objectives.Length)].gameObject).GetComponent<Objective>();
         marker.target = currentObjective.transform;
         float smoothingValue = (currentObjective.progressGoal / 100) * 7;
-        progressBar.slider.value = smoothingValue;
         progressBar.textObject.text = currentObjective.objectiveTask;
         progressBar.slider.maxValue = currentObjective.progressGoal + smoothingValue;
-        currentObjective.progress.Subscribe(value =>
+
+        currentObjective.progress.Subscribe(pValue =>
         {
-            progressBar.slider.value = value + smoothingValue;
-        }).AddTo(this);
+            progressBar.slider.value = pValue + smoothingValue;
+            if(progressBar.slider.value == progressBar.slider.maxValue)
+            {
+                progressBar.slider.value = smoothingValue;
+            }
+        }).AddTo(currentObjective);
     }
 
 
