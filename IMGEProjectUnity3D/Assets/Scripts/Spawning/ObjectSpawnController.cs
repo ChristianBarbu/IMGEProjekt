@@ -301,11 +301,11 @@ public class ObjectSpawnController : MonoBehaviour
 
     float GetWaveInactiveTime()
     {
-        return UnityEngine.Random.Range(minTimeBetweenWaves, maxTimeBetweenWaves);
+        return UnityEngine.Random.Range(minTimeBetweenWaves, Math.Max(minTimeBetweenWaves, maxTimeBetweenWaves - (maxTimeBetweenWaves * difficultyScaling * GameData.Instance.DifficultyScaling.Value / 100)));
     }
     float GetSpawnInactiveTime()
     {
-        return UnityEngine.Random.Range(minTimeBetweenSpawns, maxTimeBetweenSpawns);
+        return UnityEngine.Random.Range(minTimeBetweenSpawns, Math.Max(minTimeBetweenSpawns, maxTimeBetweenSpawns - (maxTimeBetweenSpawns * difficultyScaling * GameData.Instance.DifficultyScaling.Value / 100)));
     }
 
 
