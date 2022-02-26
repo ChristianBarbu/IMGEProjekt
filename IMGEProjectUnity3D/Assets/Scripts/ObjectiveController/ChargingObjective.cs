@@ -55,7 +55,7 @@ public class ChargingObjective: Objective
     {
         if (other.tag == "Player")
         {
-            progress.Value = Math.Min(0, progress.Value - 10);
+            //progress.Value = Math.Min(0, progress.Value - 10);
             IsCharging.Value = false;
         }
     }
