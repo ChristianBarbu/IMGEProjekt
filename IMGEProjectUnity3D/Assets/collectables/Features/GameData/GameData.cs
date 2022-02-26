@@ -1,5 +1,6 @@
 using System;
 using UniRx;
+using UniRx.Triggers;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -12,12 +13,13 @@ public class GameData : SingletonMonoBehaviour<GameData>
         _difficultyScaling.Value = 1;
     }
 
-    private ReactiveProperty<float> _difficultyScaling = new ReactiveProperty<float>();
-    public ReactiveProperty<float> DifficultyScaling
+    private void Start()
     {
-        get { return _difficultyScaling; }
-        private set { _difficultyScaling = value; }
+        this.UpdateAsObservable().Subscribe(x => { _difficultyScaling.Value += Time.deltaTime * 0.05f; }).AddTo(this);
     }
+
+    private ReactiveProperty<float> _difficultyScaling = new ReactiveProperty<float>(1);
+    public ReactiveProperty<float> DifficultyScaling => _difficultyScaling;
 
     public int EnemyCount
     {
