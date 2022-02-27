@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using Codice.Client.Common.GameUI.Checkin;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
@@ -78,7 +79,7 @@ public class FirstPersonController : MonoBehaviour, ICharacterSignals
     [SerializeField] private float speedMultiplier = 1f;
     [SerializeField] private bool jetpacks = false;
     [SerializeField] private float timeChange = 1f;
-    [SerializeField] private float jetpackBoost = 0.5f;
+    [SerializeField] private float jetpackBoost = 7.5f;
     public float StrideLength => strideLength;
 
     ReactiveProperty<bool> ICharacterSignals.IsUsingAbility => throw new NotImplementedException();
@@ -337,15 +338,6 @@ public class FirstPersonController : MonoBehaviour, ICharacterSignals
                     case ConsumableTypes.Speedbooster:
                         speedMultiplier = 10f;
                         StartCoroutine(Timer(15));
-                        break;
-                    case ConsumableTypes.Scorebooster:
-                        //
-                        break;
-                    case ConsumableTypes.Shield:
-                        //
-                        break;
-                    case ConsumableTypes.Rockets:
-
                         break;
                     case ConsumableTypes.TimeLapse:
                         Time.timeScale = 0.2f;
