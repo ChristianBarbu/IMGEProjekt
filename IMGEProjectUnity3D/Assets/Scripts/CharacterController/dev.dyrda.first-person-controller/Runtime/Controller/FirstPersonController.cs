@@ -3,6 +3,7 @@ using System.Collections;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 
@@ -35,6 +36,15 @@ public class FirstPersonController : MonoBehaviour, ICharacterSignals
     public IObservable<Unit> Stepped => _stepped;
     private Subject<Unit> _stepped;
 
+    [SerializeField]
+    private Button resume;
+
+    [SerializeField]
+    private Button controls;
+
+    [SerializeField]
+    private Button exit;
+
     private bool crouched;
     private bool jumped = false;
 
@@ -47,6 +57,8 @@ public class FirstPersonController : MonoBehaviour, ICharacterSignals
     private int cooldown = 0;
     [SerializeField]
     private int sprintCooldown;
+    private bool menu;
+    private float time = 1f;
 
     #endregion
 
@@ -96,6 +108,7 @@ public class FirstPersonController : MonoBehaviour, ICharacterSignals
         _landed = new Subject<Unit>().AddTo(this);
         _stepped = new Subject<Unit>().AddTo(this);
         crouched = false;
+        menu = false;
 
         currentWeapon = Weapons[5];
         currentWeapon.gameObject.SetActive(true);
@@ -108,13 +121,18 @@ public class FirstPersonController : MonoBehaviour, ICharacterSignals
         HandleSteppedCharacterSignal();
 
         HandleLook();
+
+        controls.gameObject.SetActive(false);
+        resume.gameObject.SetActive(false);
+        exit.gameObject.SetActive(false);
+        resume.onClick.AddListener(resumeGame);
     }
 
     private void Update()
-    {   
-        RaycastHit hit; 
+    {
+        RaycastHit hit;
         if (Physics.Raycast(this._camera.transform.position, this._camera.transform.forward, out hit, float.PositiveInfinity, ~10, QueryTriggerInteraction.Ignore) && hit.distance > 5)
-        {   
+        {
             this.currentWeapon.bulletSpawn.transform.LookAt(hit.point);
         }
         else
@@ -132,8 +150,27 @@ public class FirstPersonController : MonoBehaviour, ICharacterSignals
         this.currentWeapon.gameObject.SetActive(true);
     }
 
+    private void resumeGame()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        Time.timeScale = time;
+        controls.gameObject.SetActive(false);
+        resume.gameObject.SetActive(false);
+        exit.gameObject.SetActive(false);
+    }
+
     private void HandleLocomotion()
     {
+
+        firstPersonControllerInput.Escape.Subscribe(_ =>
+        {
+
+            Application.Quit();
+        }).AddTo(this);
+
+
+
         // Ensures the first frame counts as "grounded".
         _characterController.Move(-stickToGroundForceMagnitude * transform.up);
 
@@ -153,6 +190,8 @@ public class FirstPersonController : MonoBehaviour, ICharacterSignals
             }
 
         }).AddTo(this);
+
+
 
         // Handle move:
         _ = firstPersonControllerInput.Move
@@ -217,23 +256,19 @@ public class FirstPersonController : MonoBehaviour, ICharacterSignals
                 {
                     crouched = false;
                     verticalVelocity = _characterController.velocity.y + Physics.gravity.y * Time.deltaTime * 3.0f;
-
                 }
 
                 else
                 {
                     // ... otherwise grounded.
                     verticalVelocity = -Mathf.Abs(stickToGroundForceMagnitude);
-
                 }
 
                 float currentSpeed;
 
-
-
-
                 if (crouched)
                 {
+
 
                     if (firstPersonControllerInput.Run.Value && index <= 80 && cooldown == 0)
                     {

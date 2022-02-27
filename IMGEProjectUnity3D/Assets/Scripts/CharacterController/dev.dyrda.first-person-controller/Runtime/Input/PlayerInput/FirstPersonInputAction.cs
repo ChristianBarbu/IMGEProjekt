@@ -100,6 +100,15 @@ namespace DyrdaDev.FirstPersonController
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Escape"",
+                    ""type"": ""Button"",
+                    ""id"": ""4cdbea55-c482-469c-8ddc-fdb4ef1a3106"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -432,6 +441,28 @@ namespace DyrdaDev.FirstPersonController
                     ""action"": ""Crouch"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""56fb128d-2371-4e4f-b488-30c83062c33d"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard and Mouse"",
+                    ""action"": ""Escape"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1b571d40-d004-4dff-b77a-e25f405450b3"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Escape"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -476,6 +507,7 @@ namespace DyrdaDev.FirstPersonController
             m_Character_UseAbility = m_Character.FindAction("UseAbility", throwIfNotFound: true);
             m_Character_Jump2 = m_Character.FindAction("Jump2", throwIfNotFound: true);
             m_Character_Crouch = m_Character.FindAction("Crouch", throwIfNotFound: true);
+            m_Character_Escape = m_Character.FindAction("Escape", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -543,6 +575,7 @@ namespace DyrdaDev.FirstPersonController
         private readonly InputAction m_Character_UseAbility;
         private readonly InputAction m_Character_Jump2;
         private readonly InputAction m_Character_Crouch;
+        private readonly InputAction m_Character_Escape;
         public struct CharacterActions
         {
             private @FirstPersonInputAction m_Wrapper;
@@ -555,6 +588,7 @@ namespace DyrdaDev.FirstPersonController
             public InputAction @UseAbility => m_Wrapper.m_Character_UseAbility;
             public InputAction @Jump2 => m_Wrapper.m_Character_Jump2;
             public InputAction @Crouch => m_Wrapper.m_Character_Crouch;
+            public InputAction @Escape => m_Wrapper.m_Character_Escape;
             public InputActionMap Get() { return m_Wrapper.m_Character; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -588,6 +622,9 @@ namespace DyrdaDev.FirstPersonController
                     @Crouch.started -= m_Wrapper.m_CharacterActionsCallbackInterface.OnCrouch;
                     @Crouch.performed -= m_Wrapper.m_CharacterActionsCallbackInterface.OnCrouch;
                     @Crouch.canceled -= m_Wrapper.m_CharacterActionsCallbackInterface.OnCrouch;
+                    @Escape.started -= m_Wrapper.m_CharacterActionsCallbackInterface.OnEscape;
+                    @Escape.performed -= m_Wrapper.m_CharacterActionsCallbackInterface.OnEscape;
+                    @Escape.canceled -= m_Wrapper.m_CharacterActionsCallbackInterface.OnEscape;
                 }
                 m_Wrapper.m_CharacterActionsCallbackInterface = instance;
                 if (instance != null)
@@ -616,6 +653,9 @@ namespace DyrdaDev.FirstPersonController
                     @Crouch.started += instance.OnCrouch;
                     @Crouch.performed += instance.OnCrouch;
                     @Crouch.canceled += instance.OnCrouch;
+                    @Escape.started += instance.OnEscape;
+                    @Escape.performed += instance.OnEscape;
+                    @Escape.canceled += instance.OnEscape;
                 }
             }
         }
@@ -648,6 +688,7 @@ namespace DyrdaDev.FirstPersonController
             void OnUseAbility(InputAction.CallbackContext context);
             void OnJump2(InputAction.CallbackContext context);
             void OnCrouch(InputAction.CallbackContext context);
+            void OnEscape(InputAction.CallbackContext context);
         }
     }
 }
