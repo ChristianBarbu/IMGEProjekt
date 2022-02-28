@@ -380,6 +380,7 @@ public class FirstPersonController : MonoBehaviour, ICharacterSignals
                         consumable = ConsumableTypes.None;
                         break;
                 }
+                currentIcon.SetActive(false);
             }
         }
         ).AddTo(this);
