@@ -30,7 +30,7 @@ public class HeavyBulletScript : MonoBehaviour
     {
         RaycastHit hit;
 
-        if (Physics.Raycast(this.transform.position, Vector3.forward, out hit, Time.deltaTime * 50, layermask, QueryTriggerInteraction.Ignore))
+        if (Physics.Raycast(this.transform.position, transform.forward, out hit, Time.deltaTime * 50, layermask, QueryTriggerInteraction.Ignore))
         {
             this.transform.position = hit.point;
             OnHitEnter(hit.collider);
