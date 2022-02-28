@@ -79,7 +79,7 @@ public class FirstPersonController : MonoBehaviour, ICharacterSignals
     [SerializeField] private float speedMultiplier = 1f;
     [SerializeField] private bool jetpacks = false;
     [SerializeField] private float timeChange = 1f;
-    [SerializeField] private float jetpackBoost = 7.5f;
+    [SerializeField] private float jetpackBoost = 100;
     public float StrideLength => strideLength;
 
     ReactiveProperty<bool> ICharacterSignals.IsUsingAbility => throw new NotImplementedException();
