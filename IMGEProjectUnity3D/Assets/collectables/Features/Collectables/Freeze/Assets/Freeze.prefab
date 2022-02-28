@@ -198,7 +198,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cost: 50
-  weight: 10
+  weight: 5
   minSpawnDistance: 200
   maxSpawnDistance: 700
   canSpawnInAir: 0

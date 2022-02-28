@@ -4487,6 +4487,22 @@ PrefabInstance:
       propertyPath: speedBoosterIcon
       value: 
       objectReference: {fileID: 571478567}
+    - target: {fileID: 1087946835126316329, guid: a599b4abb976b4e48b9a65f0e4f1e21c, type: 3}
+      propertyPath: m_Height
+      value: 3.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1087946835126316329, guid: a599b4abb976b4e48b9a65f0e4f1e21c, type: 3}
+      propertyPath: m_Radius
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1087946835126316329, guid: a599b4abb976b4e48b9a65f0e4f1e21c, type: 3}
+      propertyPath: m_SlopeLimit
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 1087946835126316329, guid: a599b4abb976b4e48b9a65f0e4f1e21c, type: 3}
+      propertyPath: m_StepOffset
+      value: 0.6
+      objectReference: {fileID: 0}
     - target: {fileID: 1611492464202296268, guid: a599b4abb976b4e48b9a65f0e4f1e21c, type: 3}
       propertyPath: m_Layer
       value: 0
@@ -25679,7 +25695,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4024493538922333113, guid: fb45f1ca5184bad45bdbb211da7d899d, type: 3}
       propertyPath: startCredits
-      value: 1000
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4024493538922333113, guid: fb45f1ca5184bad45bdbb211da7d899d, type: 3}
       propertyPath: objects.Array.size
@@ -25687,7 +25703,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4024493538922333113, guid: fb45f1ca5184bad45bdbb211da7d899d, type: 3}
       propertyPath: maxTimeBetweenWaves
-      value: 2
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4024493538922333113, guid: fb45f1ca5184bad45bdbb211da7d899d, type: 3}
+      propertyPath: minTimeBetweenWaves
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4024493538922333113, guid: fb45f1ca5184bad45bdbb211da7d899d, type: 3}
       propertyPath: objects.Array.data[0]

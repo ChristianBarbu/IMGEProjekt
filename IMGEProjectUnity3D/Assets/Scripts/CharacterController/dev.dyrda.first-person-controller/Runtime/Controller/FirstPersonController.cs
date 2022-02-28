@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using Codice.Client.Common.GameUI.Checkin;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
@@ -161,7 +160,8 @@ public class FirstPersonController : MonoBehaviour, ICharacterSignals
     private void Update()
     {
         RaycastHit hit;
-        if (Physics.Raycast(this._camera.transform.position, this._camera.transform.forward, out hit, float.PositiveInfinity, ~10, QueryTriggerInteraction.Ignore) && hit.distance > 5)
+        if (Physics.Raycast(this._camera.transform.position, 
+            this._camera.transform.forward, out hit, float.PositiveInfinity, ~10, QueryTriggerInteraction.Ignore) && hit.distance > 5)
         {
             this.currentWeapon.bulletSpawn.transform.LookAt(hit.point);
         }
@@ -261,7 +261,7 @@ public class FirstPersonController : MonoBehaviour, ICharacterSignals
                 // The character is ...
                 RaycastHit hit;
                 // ... in the air.
-                if (firstPersonControllerInput.Jump2.Value && Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 1) && hit.transform.gameObject.CompareTag("Climb"))
+                if (firstPersonControllerInput.Jump2.Value && Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 100, ~15, QueryTriggerInteraction.Ignore) && hit.transform.gameObject.CompareTag("Climb"))
                 {
                     verticalVelocity += jumpForceMagnitude + 1;
 
@@ -380,7 +380,6 @@ public class FirstPersonController : MonoBehaviour, ICharacterSignals
                         consumable = ConsumableTypes.None;
                         break;
                 }
-                currentIcon.SetActive(false);
             }
         }
         ).AddTo(this);
