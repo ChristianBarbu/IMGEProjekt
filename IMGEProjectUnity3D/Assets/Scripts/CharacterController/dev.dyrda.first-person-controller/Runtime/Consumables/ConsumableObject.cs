@@ -8,9 +8,11 @@ public class ConsumableObject : MonoBehaviour
 {
     public ConsumableTypes type;
 
+    
+    
     public void Awake()
     {
-        int rng = UnityEngine.Random.Range(1,3);
+        int rng = UnityEngine.Random.Range(1,4);
         switch (rng)
         {
             case 1:
@@ -32,6 +34,7 @@ public class ConsumableObject : MonoBehaviour
         if (player.GetComponent<FirstPersonController>() != null)
         {
             player.gameObject.GetComponent<FirstPersonController>().consumable = this.type;
+            player.gameObject.GetComponent<FirstPersonController>().ChangeIcon();
             Destroy(this.gameObject);
         }
     }

@@ -97,7 +97,36 @@ public class FirstPersonController : MonoBehaviour, ICharacterSignals
     public WeaponController[] Weapons = new WeaponController[6];
 
     public ConsumableTypes consumable;
+    
+    [SerializeField] private GameObject jetpackIcon;
+    [SerializeField] private GameObject speedBoosterIcon;
+    [SerializeField] private GameObject timeLapseIcon;
 
+    private GameObject currentIcon;
+
+    public void ChangeIcon()
+    {
+        if (currentIcon != null)
+        {
+            currentIcon.SetActive(false);
+        }
+        switch (consumable)
+        {
+            case ConsumableTypes.Jetpack:
+                currentIcon = jetpackIcon;
+                break;
+            case ConsumableTypes.None:
+                break;
+            case ConsumableTypes.Speedbooster:
+                currentIcon = speedBoosterIcon;
+                break;
+            case ConsumableTypes.TimeLapse:
+                currentIcon = timeLapseIcon;
+                break;
+        }
+        currentIcon.SetActive(true);
+    }
+    
     private void Awake()
     {
         _characterController = GetComponent<CharacterController>();
@@ -351,6 +380,7 @@ public class FirstPersonController : MonoBehaviour, ICharacterSignals
                         consumable = ConsumableTypes.None;
                         break;
                 }
+                currentIcon.SetActive(false);
             }
         }
         ).AddTo(this);
