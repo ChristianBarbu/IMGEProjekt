@@ -4381,7 +4381,11 @@ PrefabInstance:
       objectReference: {fileID: 1310768150}
     - target: {fileID: 249736144506384604, guid: a599b4abb976b4e48b9a65f0e4f1e21c, type: 3}
       propertyPath: consumable
-      value: 3
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 249736144506384604, guid: a599b4abb976b4e48b9a65f0e4f1e21c, type: 3}
+      propertyPath: jetpackBoost
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1611492464202296268, guid: a599b4abb976b4e48b9a65f0e4f1e21c, type: 3}
       propertyPath: m_Layer
