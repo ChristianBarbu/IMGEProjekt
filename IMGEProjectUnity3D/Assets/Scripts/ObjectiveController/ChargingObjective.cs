@@ -36,7 +36,7 @@ public class ChargingObjective: Objective
         }).AddTo(this);
         completed.Where(c=>c).Subscribe(_ =>
         {
-            reward.GiveReward(receiver);
+            GameData.Instance.IncreaseScore(20);
             Destroy(gameObject);
         }).AddTo(this);
         // -> base?
@@ -58,9 +58,5 @@ public class ChargingObjective: Objective
             //progress.Value = Math.Min(0, progress.Value - 10);
             IsCharging.Value = false;
         }
-    }
-    public override void Reward()
-    {
-        
     }
 }

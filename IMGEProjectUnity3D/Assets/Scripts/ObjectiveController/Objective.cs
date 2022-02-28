@@ -13,8 +13,6 @@ public abstract class Objective : MonoBehaviour
 
     public String objectiveTask;
 
-    public abstract void Reward();
-
     public virtual void Awake()
     {
         progress = new ReactiveProperty<float>(0);

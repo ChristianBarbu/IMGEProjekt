@@ -96,7 +96,7 @@ public class FirstPersonController : MonoBehaviour, ICharacterSignals
 
     public WeaponController[] Weapons = new WeaponController[6];
 
-    public ConsumableObject consumable;
+    public ConsumableTypes consumable;
 
     private void Awake()
     {
@@ -111,7 +111,7 @@ public class FirstPersonController : MonoBehaviour, ICharacterSignals
         crouched = false;
         menu = false;
 
-        currentWeapon = Weapons[5];
+        currentWeapon = Weapons[0];
         currentWeapon.gameObject.SetActive(true);
     }
 
@@ -166,7 +166,6 @@ public class FirstPersonController : MonoBehaviour, ICharacterSignals
 
         firstPersonControllerInput.Escape.Subscribe(_ =>
         {
-
             Application.Quit();
         }).AddTo(this);
 
@@ -333,20 +332,23 @@ public class FirstPersonController : MonoBehaviour, ICharacterSignals
         {
             if (input)
             {
-                switch (consumable.type)
+                switch (consumable)
                 {
                     case ConsumableTypes.Speedbooster:
                         speedMultiplier = 10f;
                         StartCoroutine(Timer(15));
+                        consumable = ConsumableTypes.None;
                         break;
                     case ConsumableTypes.TimeLapse:
                         Time.timeScale = 0.2f;
                         timeChange = 1 / Time.timeScale;
                         StartCoroutine(Timer(10));
+                        consumable = ConsumableTypes.None;
                         break;
                     case ConsumableTypes.Jetpack:
                         jetpacks = true;
                         StartCoroutine(Timer(20));
+                        consumable = ConsumableTypes.None;
                         break;
                 }
             }

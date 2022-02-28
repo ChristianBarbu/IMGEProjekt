@@ -85,7 +85,8 @@ public class Enemy : MonoBehaviour
         Health.Where(h => h <= 0).Subscribe(_ =>
         {
             animator?.SetBool("Dead", true);
-            Destroy(gameObject,animator?.GetCurrentAnimatorStateInfo(0).length ?? 0); 
+            Destroy(gameObject, animator?.GetCurrentAnimatorStateInfo(0).length ?? 0);
+            GameData.Instance.IncreaseScore(1);
         }).AddTo(this);
         animator?.SetBool("Moving", true);
 
