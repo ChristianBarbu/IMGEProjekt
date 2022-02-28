@@ -6,7 +6,7 @@ using UnityEngine;
 public class EnemyPlasmaProjectile: MonoBehaviour
 {
     [Tooltip("max time until destroyed")]
-    public float stayAlive = 5;
+    public float stayAlive = 3;
 
     public float homingSpeed;
 
@@ -18,7 +18,9 @@ public class EnemyPlasmaProjectile: MonoBehaviour
     private Transform player;
     private Rigidbody rb;
 
-    public Enemy Enemy { get; set; }    
+    public Enemy Enemy { get; set; }
+
+    private bool dmgDone = false;
 
     private void Awake()
     {
@@ -44,29 +46,34 @@ public class EnemyPlasmaProjectile: MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Player")
+
+        if (hitSound != null)
         {
-            Enemy?.Hit();
-            if (hitSound != null)
-            {
-                hitSound.Play();
-                Destroy(gameObject, hitSound.clip.length);
-            }
+            hitSound.Play();
+            Destroy(gameObject, hitSound.clip.length);
+        }
+        else
+        {
             Destroy(gameObject);
         }
+    
     }
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
-        {
-            Enemy?.Hit();
-            if (hitSound != null)
+       {
+            if (!dmgDone)
             {
-                hitSound.Play();
-                Destroy(gameObject, hitSound.clip.length);
+                dmgDone = true;
+                Enemy?.Hit();
+                if (hitSound != null)
+                {
+                    hitSound.Play();
+                    Destroy(gameObject, hitSound.clip.length);
+                }
+                else
+                    Destroy(gameObject);
             }
-            else
-                Destroy(gameObject);
         }
     }
     public void AddForce(float force)

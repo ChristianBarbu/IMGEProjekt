@@ -113,7 +113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Pew: {fileID: 2089261457517816185, guid: fb3131a34cbe4ea45acbc6beb0b0a4ea, type: 3}
-  Dmg: 25
+  Dmg: 34
 --- !u!54 &1502070146092917342
 Rigidbody:
   m_ObjectHideFlags: 0
