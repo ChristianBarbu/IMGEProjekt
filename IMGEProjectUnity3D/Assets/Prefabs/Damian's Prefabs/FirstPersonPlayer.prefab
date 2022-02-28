@@ -471,6 +471,7 @@ GameObject:
   - component: {fileID: 1087946835126316329}
   - component: {fileID: 249736144506384604}
   - component: {fileID: 9114918985797936085}
+  - component: {fileID: 8365503560142723720}
   m_Layer: 8
   m_Name: FirstPersonPlayer
   m_TagString: Player
@@ -506,10 +507,10 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 3.8
-  m_Radius: 0.6
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
+  m_Height: 3.4
+  m_Radius: 1
+  m_SlopeLimit: 60
+  m_StepOffset: 0.6
   m_SkinWidth: 0.08
   m_MinMoveDistance: 1e-11
   m_Center: {x: 0, y: 0, z: 0}
@@ -525,12 +526,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a514e4eb8fface4b8d78f60604d3ddf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  resume: {fileID: 0}
+  controls: {fileID: 0}
+  exit: {fileID: 0}
   _cam: {fileID: 1611492464202296268}
   sprintDur: 0
   sprintCooldown: 0
   firstPersonControllerInput: {fileID: 9114918985797936085}
-  walkSpeed: 7
-  runSpeed: 12
+  walkSpeed: 14
+  runSpeed: 24
   jumpForceMagnitude: 11
   strideLength: 4.5
   speedMultiplier: 1
@@ -541,12 +545,12 @@ MonoBehaviour:
   minViewAngle: -60
   maxViewAngle: 60
   Weapons:
-  - {fileID: 4982657314499700045}
-  - {fileID: 4982657314941925674}
-  - {fileID: 4982657315946543196}
-  - {fileID: 4982657313964380874}
-  - {fileID: 4982657315602174550}
-  - {fileID: 4982657315277029619}
+  - {fileID: 4982657314657284737}
+  - {fileID: 4982657314104253041}
+  - {fileID: 4982657314524917104}
+  - {fileID: 4982657314923346230}
+  - {fileID: 4982657314774233172}
+  - {fileID: 4982657315191174264}
   consumable: {fileID: 0}
 --- !u!114 &9114918985797936085
 MonoBehaviour:
@@ -560,7 +564,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 090f897c207f96b40a9664db4a524003, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lookSmoothingFactor: 14
+  lookSmoothingFactor: 8
+--- !u!136 &8365503560142723720
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8760514501917463341}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 1.25
+  m_Height: 4.75843
+  m_Direction: 1
+  m_Center: {x: -0.07122898, y: 0, z: -0.11442661}
 --- !u!1001 &2389317490642598229
 PrefabInstance:
   m_ObjectHideFlags: 0
