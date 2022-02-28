@@ -9,6 +9,7 @@ using UnityEngine;
 public class ObjectSpawnController : MonoBehaviour
 {
     public float difficultyScaling = 1;
+    public float InitWaitTime = 10;
     public float startCredits = 100;
     [Tooltip("Object is declared to cheap to spawn if credits >= cost * ToCheapMultiplier")]
     public float ToCheapMultiplier = 6;
@@ -123,6 +124,7 @@ public class ObjectSpawnController : MonoBehaviour
 
     IEnumerator SpawnLoop()
     {
+        yield return new WaitForSeconds(InitWaitTime);
         for(; ; )
         {
             if(IsOvercrowding())
