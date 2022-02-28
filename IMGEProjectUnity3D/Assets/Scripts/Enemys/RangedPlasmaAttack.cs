@@ -10,7 +10,7 @@ public class RangedPlasmaAttack : EnemyAttack
     public override void Attack(Vector3 forward)
     {
         var p = Instantiate(projectile, spawnPosition.position, Quaternion.Euler(new Vector3(0,0,0)));
-        p.Enemy = Enemy;
+        p.Enemy = enemy;
         p.AddForce(initForce);
     }
 

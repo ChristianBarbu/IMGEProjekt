@@ -362,6 +362,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b95b7bf47eac9f4089fe3aac06c65f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemy: {fileID: 2421680917385778097}
   projectile: {fileID: 3128042415827462702, guid: 98028c1db9c7f9b468aa7695c8468860, type: 3}
   initForce: 500
   spawnPosition: {fileID: 4693094265578157608}

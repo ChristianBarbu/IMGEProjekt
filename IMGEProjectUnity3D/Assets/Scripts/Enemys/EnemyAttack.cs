@@ -6,7 +6,7 @@ public abstract class EnemyAttack : MonoBehaviour
 {
     protected Transform player;
 
-    public Enemy Enemy { get; set; }
+    public Enemy enemy;
 
     public void Start()
     {
